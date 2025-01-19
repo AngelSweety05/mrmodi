@@ -50,7 +50,7 @@ class Database:
     async def get_votes(self):
         result = await self.votes.find_one({"_id": "vote_counts"})
         if result:
-            return {emoji: result[emoji] for emoji in ["🤬", "👎", "🖕", "🤡", "💩", "👽"]}
+            return {emoji: result[emoji] for emoji in ["🤬", "👎", "🖕", "💩"]}
         return {}
 
     def new_user(self, id, name):
