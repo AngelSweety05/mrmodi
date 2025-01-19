@@ -21,7 +21,7 @@ from server.exceptions import FIleNotFound, InvalidHash
 from zzint import StartTime, __version__
 from util.custom_dl import ByteStreamer
 from util.time_format import get_readable_time
-from util.render_template import render_page
+from util.render_template import render_page, render_lazydeveloper
 from info import *
 
 
@@ -66,6 +66,32 @@ async def stream_handler(request: web.Request):
     except Exception as e:
         logging.critical(e.with_traceback(None))
         raise web.HTTPInternalServerError(text=str(e))
+
+import base64
+
+@routes.get(r"/getfile/{unique_id}", allow_head=True)
+async def file_handler(request: web.Request):
+    """
+    Validate the unique_id and serve the page for the shorten video URL.
+    """
+    try:
+        # Extract unique_id and message_id from the URL
+        encoded_string = request.match_info["unique_id"]
+        # message_id = int(request.match_info["message_id"])
+        decoded_url = base64.urlsafe_b64decode(encoded_string.encode()).decode()
+
+        if not decoded_url.startswith("http"):
+            raise web.HTTPNotFound(text="❌ URL not found or invalid.")
+
+        # Render the play.html with the retrieved URL
+        return web.Response(
+            text=await render_lazydeveloper(decoded_url),
+            content_type="text/html"
+        )
+
+    except Exception as e:
+        logging.critical(e, exc_info=True)
+        raise web.HTTPInternalServerError(text=f"❌ An error occurred: {str(e)}")
 
 @routes.get(r"/{path:\S+}", allow_head=True)
 async def stream_handler(request: web.Request):
