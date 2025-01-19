@@ -1,5 +1,6 @@
 class script(object):
-    START_TXT = """Wʜᴀᴛ's ᴜᴘ ᴄɪɴᴇᴍᴀ ʟᴏᴠᴇʀ ! {} I'ᴍ ʏᴏᴜʀ ʙᴇʟᴏᴠᴇᴅ <a href=https://t.me/{}>{}</a>.\n\nFᴀsᴛᴇɴ ʏᴏᴜʀ sᴇᴀᴛʙᴇʟᴛs! I'ᴍ ʜᴇʀᴇ ᴛᴏ ʙʀɪɴɢ ᴍᴏᴠɪᴇs ᴛᴏ ʏᴏᴜʀ Tᴇʟᴇɢʀᴀᴍ ɢʀᴏᴜᴘ ғᴀsᴛᴇʀ ᴛʜᴀɴ ᴀ Hᴏʟʟʏᴡᴏᴏᴅ ᴄᴀʀ ᴄʜᴀsᴇ. Lᴇᴛ's ʀᴏʟʟ! 🚗💨
+    START_TXT = """🤙 नमस्कार {},
+<spoiler>बीड़ी में तम्बाकू है, __ वाला डाकू हैं🤣 \n🙏 मित्रों नीचे दिए गए बटन पर वोट दे कर मुझे विजय बनाये !🙏                          .</spoiler>
 """
     LZTHMB_TEXT = """Hello {},
 Glad to see you here. It seems that you really love <a href=https://t.me/LazyDeveloperr >LazyDeveloper's</a> work.\n\n<b>Thumbnail extracting</b> feature will be available soon, please join <a href=https://t.me/LazyDeveloper>Dev Channel</a> and stay tuned for next <a href=https://t.me/LazyDeveloper>update</a>.\n\n  🐞 ══• ʀᴇᴘᴏʀᴛ ɪꜱꜱᴜᴇ •══ here: <a href=http://t.me/LazyDeveloperSupport>LazyDev Support</a>
@@ -107,23 +108,31 @@ Here is the help for my COMMANDS."""
 
 """
     ABOUT_TXT = """✯ 𝕚𝕥𝕤❜𝕤 me: {}
-✯ 𝙲𝚁𝙴𝙰𝚃𝙾𝚁: <a href=https://t.me/LazyDeveloper>🦋 𝕃𝕒𝕫𝕪𝔻𝕖𝕧𝕖𝕝𝕠𝕡𝕖𝕣 🦋</a>
+✯ OWNER: <a href=https://t.me/Hidden_Xman>👑 Hidden_Xman 👑</a>
+✯ 𝙲𝚁𝙴𝙰𝚃𝙾𝚁: <a href=https://t.me/LazyDeveloperr>🦋 LazyDeveloperr 🦋</a>
 ✯ 𝙻𝙸𝙱𝚁𝙰𝚁𝚈: 𝙿𝚈𝚁𝙾𝙶𝚁𝙰𝙼
 ✯ 𝙻𝙰𝙽𝙶𝚄𝙰𝙶𝙴: 𝙿𝚈𝚃𝙷𝙾𝙽 𝟹
 ✯ 𝙳𝙰𝚃𝙰 𝙱𝙰𝚂𝙴: 𝙼𝙾𝙽𝙶𝙾 𝙳𝙱
 ✯ 𝙱𝙾𝚃 𝚂𝙴𝚁𝚅𝙴𝚁: 𝙷𝙴𝚁𝙾𝙺𝚄
-✯ 𝙱𝚄𝙸𝙻𝙳 𝚂𝚃𝙰𝚃𝚄𝚂: 𝒗10.0[𝑹𝑬𝑽𝑰𝑺𝑬𝑫]
+✯ 𝙱𝚄𝙸𝙻𝙳 𝚂𝚃𝙰𝚃𝚄𝚂: V 11 PRO
 """
 
-    SOURCE_TXT = """<b>NOTE:</b>
-- 🎉Lᴀᴢʏ Pʀɪɴᴄᴇss ɪs ᴀɴ ᴏᴘᴇɴ sᴏᴜʀᴄᴇ ᴘʀᴏᴊᴇᴄᴛ.
+    SOURCE_TXT = """<b>📨NOTE:</b>
+- देवियों और सज्जनों... 
+अगर ये BOT पसंद आया तो अपना खुद का एक बॉट बना लो !! 
+मैंने, डेवलपर महोदय से बोला है की, इसका दाम अगर हजार से नीचे नहीं रखा तो, देश से बाहर निकलवा दूंगा...
 
-- 🎁Sᴏᴜʀᴄᴇ - https://github.com/LazyDeveloperr/LazyPrincess 
- 
-- ✨Pʟᴇᴀsᴇ ɢɪᴠᴇ ᴀ sᴛᴀʀ ᴛᴏ ᴛʜɪs ʀᴇᴘᴏ ᴀғᴛᴇʀ ғᴏʀᴋ. Sᴀʟᴜᴛᴇ ᴛᴏ sɪʀ <a href=https://t.me/LazyDeveloperr>LᴀᴢʏDᴇᴠᴇʟᴏᴘᴇʀ</a> ғᴏʀ ᴀᴅᴅɪɴɢ ᴇxᴛʀᴀ ғᴇᴀᴛᴜʀᴇs ɪɴ ᴍᴇ.
+नीचे उसका TELEGRAM USERNAME है !
+<spoiler>The one & only @LazyDeveloperr 💘</spoiler>
+"""
+    DEVELOPER = """<b>📨NOTE:</b>
+- देवियों और सज्जनों... 
+अगर ये BOT पसंद आया तो अपना खुद का एक बॉट बना लो !! 
+मैंने, डेवलपर महोदय से बोला है की, इसका दाम अगर हजार से नीचे नहीं रखा तो, देश से बाहर निकलवा दूंगा...
 
-<b>DEV:</b>
-- 🦋 <a href=https://t.me/LazyDeveloper>LazyDeveloper</a> 🦋"""
+नीचे उसका TELEGRAM USERNAME है !
+<spoiler>The one & only @LazyDeveloperr 💘</spoiler>
+"""
     MANUELFILTER_TXT = """Help: <b>Filters</b>
 
 - Fɪʟᴛᴇʀ ɪs ᴛʜᴇ ғᴇᴀᴛᴜʀᴇ ᴡᴇʀᴇ ᴜsᴇʀs ᴄᴀɴ sᴇᴛ ᴀᴜᴛᴏᴍᴀᴛᴇᴅ ʀᴇᴘʟɪᴇs ғᴏʀ ᴀ ᴘᴀʀᴛɪᴄᴜʟᴀʀ ᴋᴇʏᴡᴏʀᴅ ᴀɴᴅ LᴀᴢʏPʀɪɴᴇss ᴡɪʟʟ ʀᴇsᴘᴏɴᴅ ᴡʜᴇɴᴇᴠᴇʀ ᴛʜᴀᴛ ᴋᴇʏᴡᴏʀᴅ ʜɪᴛs ᴛʜᴇ ᴍᴇssᴀɢᴇ
@@ -151,13 +160,12 @@ Here is the help for my COMMANDS."""
 
 <b>Alert buttons:</b>
 <code>[Button Text](buttonalert:This is an alert message)</code>"""
+    
     AUTOFILTER_TXT = """Help: <b>Auto Filter</b>
-
 <b>NOTE:</b>
-1. 🇲​​​​​🇦​​​​​🇰​​​​​🇪​​​​​ 🇲​​​​​🇪​​​​​ 🇹​​​​​🇭​​​​​🇪​​​​​ 🇦​​​​​🇩​​​​​🇲​​​​​🇮​​​​​🇳​​​​​ 🇴​​​​​🇫​​​​​ 🇾​​​​​🇴​​​​​🇺​​​​​🇷​​​​​ 🇨​​​​​🇭​​​​​🇦​​​​​🇳​​​​​🇳​​​​​🇪​​​​​🇱​​​​​ 🇮​​​​​🇫​​​​​ 🇮​​​​​🇹​​​​​'🇸​​​​​ 🇵​​​​​🇷​​​​​🇮​​​​​🇻​​​​​🇦​​​​​🇹​​​​​🇪​​​​​.
-2. 🇲​​​​​🇦​​​​​🇰​​​​​🇪​​​​​ 🇸​​​​​🇺​​​​​🇷​​​​​🇪​​​​​ 🇹​​​​​🇭​​​​​🇦​​​​​🇹​​​​​ 🇾​​​​​🇴​​​​​🇺​​​​​🇷​​​​​ 🇨​​​​​🇭​​​​​🇦​​​​​🇳​​​​​🇳​​​​​🇪​​​​​🇱​​​​​ 🇩​​​​​🇴​​​​​🇪​​​​​🇸​​​​​ 🇳​​​​​🇴​​​​​🇹​​​​​ 🇨​​​​​🇴​​​​​🇳​​​​​🇹​​​​​🇦​​​​​🇮​​​​​🇳​​​​​🇸​​​​​ 🇨​​​​​🇦​​​​​🇲​​​​​🇷​​​​​🇮​​​​​🇵​​​​​🇸​​​​​, 🇵​​​​​🇴​​​​​🇷​​​​​🇳​​​​​ 🇦​​​​​🇳​​​​​🇩​​​​​ 🇫​​​​​🇦​​​​​🇰​​​​​🇪​​​​​ 🇫​​​​​🇮​​​​​🇱​​​​​🇪​​​​​🇸​​​​​.
-3. 🇫​​​​​🇴​​​​​🇷​​​​​🇼​​​​​🇦​​​​​🇷​​​​​🇩​​​​​ 🇹​​​​​🇭​​​​​🇪​​​​​ 🇱​​​​​🇦​​​​​🇸​​​​​🇹​​​​​ 🇲​​​​​🇪​​​​​🇸​​​​​🇸​​​​​🇦​​​​​🇬​​​​​🇪​​​​​ 🇹​​​​​🇴​​​​​ 🇲​​​​​🇪​​​​​ 🇼​​​​​🇮​​​​​🇹​​​​​🇭​​​​​ 🇶​​​​​🇺​​​​​🇴​​​​​🇹​​​​​🇪​​​​​🇸​​​​​.
- 🇮​​​​​'🇱​​​​​🇱​​​​​ 🇦​​​​​🇩​​​​​🇩​​​​​ 🇦​​​​​🇱​​​​​🇱​​​​​ 🇹​​​​​🇭​​​​​🇪​​​​​ 🇫​​​​​🇮​​​​​🇱​​​​​🇪​​​​​🇸​​​​​ 🇮​​​​​🇳​​​​​ 🇹​​​​​🇭​​​​​🇦​​​​​🇹​​​​​ 🇨​​​​​🇭​​​​​🇦​​​​​🇳​​​​​🇳​​​​​🇪​​​​​🇱​​​​​ 🇹​​​​​🇴​​​​​ 🇲​​​​​🇾​​​​​ 🇩​​​​​🇧​​​​​.
+1. Make me an admin in your channel if it's private.
+2. Ensure your channel does not contain restricted content (e.g., spam, porn, fake files).
+3. Forward the last message of the channel with quotes. I'll add the files to my database.
 """
     CONNECTION_TXT = """Help: <b>Connections</b>
 
