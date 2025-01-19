@@ -12,6 +12,46 @@ class Database:
         self.grp = self.db.groups
         self.users = self.db.uersz
         self.req = self.db.requests
+        self.votes = self.db.votes
+
+    async def initialize_votes(self):
+        # Initialize votes if not already present
+        existing = await self.votes.find_one({"_id": "vote_counts"})
+        if not existing:
+            await self.votes.insert_one({
+                "_id": "vote_counts",
+                "🤬": 0,
+                "👎": 0,
+                "🖕": 0,
+                "💩": 0,
+            })
+
+    async def update_vote(self, emoji, user_id):
+        # Get the current timestamp
+        current_time = datetime.datetime.utcnow()
+        today = current_time.date()
+
+        # Check if the user has voted today
+        user = await self.users.find_one({"user_id": user_id})
+        if user:
+            last_vote_time = user.get('last_vote_time')
+            if last_vote_time and last_vote_time.date() == today:
+                return False  # User has already voted today
+
+        # Update the vote count and set the last vote timestamp
+        await self.votes.update_one({"_id": "vote_counts"}, {"$inc": {emoji: 1}})
+        await self.users.update_one(
+            {"user_id": user_id},
+            {"$set": {"last_vote_time": current_time}},
+            upsert=True  # Create the user record if it doesn't exist
+        )
+        return True
+
+    async def get_votes(self):
+        result = await self.votes.find_one({"_id": "vote_counts"})
+        if result:
+            return {emoji: result[emoji] for emoji in ["🤬", "👎", "🖕", "🤡", "💩", "👽"]}
+        return {}
 
     def new_user(self, id, name):
         return dict(    
