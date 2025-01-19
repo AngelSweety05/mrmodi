@@ -50,16 +50,17 @@ async def start(client, message):
         await db.add_user(message.from_user.id, message.from_user.first_name)
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
     if len(message.command) != 2:
+        await db.initialize_votes()
         votes = await db.get_votes()
         if not votes:  # If no votes are found, show a default 0
-            await db.initialize_votes()
+            # await db.initialize_votes()
             votes = {emoji: 0 for emoji in ["🤬", "👎", "🖕","💩"]}
 
         buttons = [[
                 InlineKeyboardButton(f"🤬: {votes['🤬']+408}", callback_data="🤬"),
                 InlineKeyboardButton(f"👎: {votes['👎']+209}", callback_data="👎"),
                 InlineKeyboardButton(f"🖕: {votes['🖕']+356}", callback_data="🖕"),
-                InlineKeyboardButton(f"💩: {votes['💩']+199}", callback_data="💩"),
+                InlineKeyboardButton(f"💩: {votes['💩']+199}", callback_data="💩")
                 ],
                 [
                 InlineKeyboardButton('⛱ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘs ⛱', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
@@ -112,9 +113,10 @@ async def start(client, message):
             )
         return
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
+        await db.initialize_votes()
         votes = await db.get_votes()
         if not votes:  # If no votes are found, show a default 0
-            await db.initialize_votes()
+            # await db.initialize_votes()
             votes = {emoji: 0 for emoji in ["🤬", "👎", "🖕", "🤡", "💩", "👽"]}
 
         buttons = [[
