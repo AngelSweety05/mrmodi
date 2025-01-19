@@ -168,9 +168,9 @@ Here is the help for my COMMANDS."""
 3. Forward the last message of the channel with quotes. I'll add the files to my database.
 """
     CONNECTION_TXT = """Help: <b>Connections</b>
-
-- 🇺​​​​​🇸​​​​​🇪​​​​​🇩​​​​​ 🇹​​​​​🇴​​​​​ 🇨​​​​​🇴​​​​​🇳​​​​​🇳​​​​​🇪​​​​​🇨​​​​​🇹​​​​​ 🇧​​​​​🇴​​​​​🇹​​​​​ 🇹​​​​​🇴​​​​​ 🇵​​​​​🇲​​​​​ 🇫​​​​​🇴​​​​​🇷​​​​​ 🇲​​​​​🇦​​​​​🇳​​​​​🇦​​​​​🇬​​​​​🇮​​​​​🇳​​​​​🇬​​​​​ 🇫​​​​​🇮​​​​​🇱​​​​​🇹​​​​​🇪​​​​​🇷​​​​​🇸​​​​​ 
-- 🇮​​​​​🇹​​​​​ 🇭​​​​​🇪​​​​​🇱​​​​​🇵​​​​​🇸​​​​​ 🇹​​​​​🇴​​​​​ 🇦​​​​​🇻​​​​​🇴​​​​​🇮​​​​​🇩​​​​​ 🇸​​​​​🇵​​​​​🇦​​​​​🇲​​​​​🇲​​​​​🇮​​​​​🇳​​​​​🇬​​​​​ 🇮​​​​​🇳​​​​​ Gʀᴏᴜᴘ🇸​​​​​.
+<spoiler>
+- Used to connect bot to PM for managing filters
+- It helps to avoid spamming in groups
 
 <b>NOTE:</b>
 1. Only admins can add a connection.
@@ -180,9 +180,10 @@ Here is the help for my COMMANDS."""
 • /connect  - <code>connect a particular chat to your PM</code>
 • /disconnect  - <code>disconnect from a chat</code>
 • /connections - <code>list all your connections</code>
+</spoiler>
 """
     EXTRAMOD_TXT = """Help: <b>Extra Modules</b>
-
+<blockquote>
 <b>NOTE:</b>
 these are the extra features of Lazy Princess
 
@@ -190,9 +191,11 @@ these are the extra features of Lazy Princess
 • /id - <code>get id of a specified user.</code>
 • /info  - <code>get information about a user.</code>
 • /imdb  - <code>get the film information from IMDb source.</code>
-• /search  - <code>get the film information from various sources.</code>"""
-    ADMIN_TXT = """Help: <b>Admin mods</b>
-
+• /search  - <code>get the film information from various sources.</code>
+</blockquote>
+"""
+    ADMIN_TXT = """Help: <b>Admin Modes</b>
+<spoiler>
 <b>NOTE:</b>
 This module only works for my admins
 
@@ -207,12 +210,13 @@ This module only works for my admins
 • /ban  - <code>to ban a user.</code>
 • /unban  - <code>to unban a user.</code>
 • /channel - <code>to get list of total connected channels</code>
-• /broadcast - <code>to broadcast a message to all users</code>"""
-    STATUS_TXT = """★ 𝚃𝙾𝚃𝙰𝙻 𝙵𝙸𝙻𝙴𝚂: <code>{}</code>
+• /broadcast - <code>to broadcast a message to all users</code>
+</spoiler>"""
+    STATUS_TXT = """<blockquote>★ 𝚃𝙾𝚃𝙰𝙻 𝙵𝙸𝙻𝙴𝚂: <code>{}</code>
 ★ 𝚃𝙾𝚃𝙰𝙻 𝚄𝚂𝙴𝚁𝚂: <code>{}</code>
 ★ 𝚃𝙾𝚃𝙰𝙻 𝙲𝙷𝙰𝚃𝚂: <code>{}</code>
 ★ 𝚄𝚂𝙴𝙳 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code> 𝙼𝚒𝙱
-★ 𝙵𝚁𝙴𝙴 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code> 𝙼𝚒𝙱"""
+★ 𝙵𝚁𝙴𝙴 𝚂𝚃𝙾𝚁𝙰𝙶𝙴: <code>{}</code> 𝙼𝚒𝙱</blockquote>"""
     LOG_TEXT_G = """#NewGroup
 Group = {}(<code>{}</code>)
 Total Members = <code>{}</code>
@@ -224,7 +228,7 @@ Name - {}
 """
     PLANS_TXT = """<b>👋 ʜᴇʏ {},
     
-<i>🎖️ ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʟᴀɴs :</i>
+<blockquote>🎖️ ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʟᴀɴs :</blockquote>
 
 ● <code>02₹</code> ➛ <u>ʙʀᴏɴᴢᴇ ᴘʟᴀɴ</u> » <code>7 ᴅᴀʏꜱ</code>
 ● <code>09₹</code> ➛ <u>Sɪʟᴠᴇʀ ᴘʟᴀɴ</u> » <code>31 ᴅᴀʏꜱ</code>
@@ -232,10 +236,10 @@ Name - {}
 ● <code>49₹</code> ➛ <u>ᴘʟᴀᴛɪɴᴜᴍ ᴘʟᴀɴ</u> » <code>181 ᴅᴀʏꜱ</code>
 ● <code>99₹</code> ➛ <u>ᴅɪᴀᴍᴏɴᴅ ᴘʟᴀɴ</u> » <code>366 ᴅᴀʏꜱ</code>
 
-♥ ᴜᴘɪ ɪᴅ - <code>{}</code>
-📸 sᴄᴀɴ QR - <a href='{}'>ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ Pay</a>
+<blockquote>♥ ᴜᴘɪ ɪᴅ - <code>{}</code>
+📸 sᴄᴀɴ QR - <a href='{}'>ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ Pay</a></blockquote>
 
-⚜️ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ ʙʏ ᴜꜱɪɴɢ : /myplan
+<blockquote>⚜️ ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴀᴄᴛɪᴠᴇ ᴘʟᴀɴ ʙʏ ᴜꜱɪɴɢ : /myplan</blockquote>
 
 ‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ.</b>"""
     PROGRESS_BAR = """\n
