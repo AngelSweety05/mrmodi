@@ -27,12 +27,33 @@ BATCH_FILES = {}
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
     if message.chat.type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-        buttons = [
+        if message.from_user.id in ADMINS:
+            buttons = [
                 [
                     InlineKeyboardButton('🔍 Group​​​​​', url=f'https://t.me/{MOVIE_GROUP_USERNAME}')
                 ],
                 [
                     InlineKeyboardButton('🙆🏻 Hᴇʟᴘ 🦾', url=f"https://t.me/{temp.U_NAME}?start=help"),
+                ],[
+                InlineKeyboardButton('⪦ 𝕄𝕆𝕍𝕀𝔼 ℂℍ𝔸ℕℕ𝔼𝕃 ⪧', url='https://t.me/real_MoviesAdda3')
+                ],[
+                InlineKeyboardButton('💸 E𝐚𝐫𝐧 M𝐨𝐧𝐞𝐲 💸', callback_data="shortlink_info")
+                ],
+                [
+                    InlineKeyboardButton(text=DOWNLOAD_TEXT_NAME,url=DOWNLOAD_TEXT_URL)
+                ]
+                ]
+        else:
+            buttons = [
+                [
+                    InlineKeyboardButton('🔍 Group​​​​​', url=f'https://t.me/{MOVIE_GROUP_USERNAME}')
+                ],
+                [
+                    InlineKeyboardButton('🙆🏻 Hᴇʟᴘ 🦾', url=f"https://t.me/{temp.U_NAME}?start=help"),
+                ],[
+                InlineKeyboardButton('⪦ 𝕄𝕆𝕍𝕀𝔼 ℂℍ𝔸ℕℕ𝔼𝕃 ⪧', url='https://t.me/real_MoviesAdda3')
+                ],[
+                InlineKeyboardButton('🎉 Learn BOT making 🎊', url="https://youtube.com/@LazyDeveloperr")
                 ],
                 [
                     InlineKeyboardButton(text=DOWNLOAD_TEXT_NAME,url=DOWNLOAD_TEXT_URL)
@@ -50,37 +71,46 @@ async def start(client, message):
         await db.add_user(message.from_user.id, message.from_user.first_name)
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
     if len(message.command) != 2:
-        votes = await db.get_votes()
-        if not votes:  # If no votes are found, show a default 0
-            await db.initialize_votes()
-            votes = {emoji: 0 for emoji in ["🤬", "👎", "🖕","💩"]}
-
-        buttons = [[
-                InlineKeyboardButton(f"🤬: {votes['🤬']+408}", callback_data="🤬"),
-                InlineKeyboardButton(f"👎: {votes['👎']+209}", callback_data="👎"),
-                InlineKeyboardButton(f"🖕: {votes['🖕']+356}", callback_data="🖕"),
-                InlineKeyboardButton(f"💩: {votes['💩']+199}", callback_data="💩"),
-                ],
-                [
-                InlineKeyboardButton('⛱ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘs ⛱', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
-                ],
-                [
-                InlineKeyboardButton('𓆩• ᴄʜᴀɴɴᴇʟ •𓆪', url=f'https://t.me/{MAIN_CHANNEL_USRNM}'),
-                InlineKeyboardButton('𓆩• ɢʀᴏᴜᴘ •𓆪', url=f'https://t.me/{MOVIE_GROUP_USERNAME}')
+        if message.from_user.id in ADMINS:
+            buttons = [[
+                InlineKeyboardButton('↖️ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘs ↗️', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
                 ],[
-                InlineKeyboardButton('𓆩• ʜᴇʟᴘ •𓆪', callback_data='help'),
-                InlineKeyboardButton('𓆩• ꜱᴜᴘᴘᴏʀᴛ •𓆪', callback_data='leech_url_help'),
+                InlineKeyboardButton('🧞‍♀️ Sᴇᴀʀᴄʜ', switch_inline_query_current_chat=''),
+                InlineKeyboardButton('🔍 Gʀᴏᴜᴘ', url=f'https://t.me/{MOVIE_GROUP_USERNAME}')
                 ],[
-                InlineKeyboardButton('𓆩• ᴀʙᴏᴜᴛ |&| ᴅᴇᴠᴇʟᴏᴘᴇʀ •𓆪', callback_data='source'),
+                InlineKeyboardButton('🙆🏻 Hᴇʟᴘ ', callback_data='help'),
+                InlineKeyboardButton('🎁 Hᴇʟᴘ++', callback_data='leech_url_help'),
+                ],[
+                InlineKeyboardButton('⚙ Sᴇᴛᴛɪɴɢs', callback_data='openSettings'),
+                InlineKeyboardButton('♥️ Aʙᴏᴜᴛ', callback_data='about')
+                ],[
+                InlineKeyboardButton('⪦ 𝕄𝕆𝕍𝕀𝔼 ℂℍ𝔸ℕℕ𝔼𝕃 ⪧', url='https://t.me/real_MoviesAdda3')
+                ],[
+                InlineKeyboardButton('💸 E𝐚𝐫𝐧 M𝐨𝐧𝐞𝐲 💸', callback_data="shortlink_info")
                 ]]
-
+        else:
+            buttons = [[
+                InlineKeyboardButton('↖️ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘs ↗️', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+                ],[
+                InlineKeyboardButton('🧞‍♀️ Sᴇᴀʀᴄʜ', switch_inline_query_current_chat=''),
+                InlineKeyboardButton('🔍 Gʀᴏᴜᴘ', url=f'https://t.me/{MOVIE_GROUP_USERNAME}')
+                ],[
+                InlineKeyboardButton('🙆🏻 Hᴇʟᴘ ', callback_data='help'),
+                InlineKeyboardButton('🎁 Hᴇʟᴘ++', callback_data='leech_url_help'),
+                ],[
+                InlineKeyboardButton('⚙ Sᴇᴛᴛɪɴɢs', callback_data='openSettings'),
+                InlineKeyboardButton('♥️ Aʙᴏᴜᴛ', callback_data='about')
+                ],[
+                InlineKeyboardButton('⪦ 𝕄𝕆𝕍𝕀𝔼 ℂℍ𝔸ℕℕ𝔼𝕃 ⪧', url='https://t.me/real_MoviesAdda3')
+                ],[
+                InlineKeyboardButton('🎉 Learn BOT making 🎊', url="https://youtube.com/@LazyDeveloperr")
+                ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
             photo=random.choice(PICS),
             caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
             reply_markup=reply_markup,
-            parse_mode=enums.ParseMode.HTML,
-            has_spoiler=True
+            parse_mode=enums.ParseMode.HTML
         )
         return
     if AUTH_CHANNEL and not await is_subscribed(client, message):
@@ -93,6 +123,11 @@ async def start(client, message):
             [
                 InlineKeyboardButton(
                     "🤖 Join Updates Channel", url=invite_link.invite_link
+                )
+            ],
+             [
+                InlineKeyboardButton(
+                    "🦋 SUBSCRIBE YT Channel 🦋", url='https://youtube.com/@LazyDeveloperr'
                 )
             ]
         ]
@@ -112,37 +147,52 @@ async def start(client, message):
             )
         return
     if len(message.command) == 2 and message.command[1] in ["subscribe", "error", "okay", "help"]:
-        votes = await db.get_votes()
-        if not votes:  # If no votes are found, show a default 0
-            await db.initialize_votes()
-            votes = {emoji: 0 for emoji in ["🤬", "👎", "🖕", "🤡", "💩", "👽"]}
-
-        buttons = [[
-                InlineKeyboardButton(f"🤬: {votes['🤬']+408}", callback_data="🤬"),
-                InlineKeyboardButton(f"👎: {votes['👎']+209}", callback_data="👎"),
-                InlineKeyboardButton(f"🖕: {votes['🖕']+356}", callback_data="🖕"),
-                InlineKeyboardButton(f"💩: {votes['💩']+199}", callback_data="💩"),
-                ],
-                [
-                InlineKeyboardButton('⛱ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘs ⛱', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
-                ],
-                [
-                InlineKeyboardButton('𓆩• ᴄʜᴀɴɴᴇʟ •𓆪', url=f'https://t.me/{MAIN_CHANNEL_USRNM}'),
-                InlineKeyboardButton('𓆩• ɢʀᴏᴜᴘ •𓆪', url=f'https://t.me/{MOVIE_GROUP_USERNAME}')
+        if message.from_user.id in ADMINS:
+            buttons = [[
+                InlineKeyboardButton('↖️ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘs ↗️', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
                 ],[
-                InlineKeyboardButton('𓆩• ʜᴇʟᴘ •𓆪', callback_data='help'),
-                InlineKeyboardButton('𓆩• ꜱᴜᴘᴘᴏʀᴛ •𓆪', callback_data='leech_url_help'),
+                InlineKeyboardButton('🧞‍♀️ Sᴇᴀʀᴄʜ', switch_inline_query_current_chat=''),
+                InlineKeyboardButton('🔍 Gʀᴏᴜᴘ', url=f'https://t.me/{MOVIE_GROUP_USERNAME}')
                 ],[
-                InlineKeyboardButton('𓆩• ᴀʙᴏᴜᴛ |&| ᴅᴇᴠᴇʟᴏᴘᴇʀ •𓆪', callback_data='source'),
-                ]]
-
+                InlineKeyboardButton('🙆🏻 Hᴇʟᴘ', callback_data='help'),
+                InlineKeyboardButton('🎁 Hᴇʟᴘ++ ', callback_data='leech_url_help'),
+            ],[
+                InlineKeyboardButton('⚙ Sᴇᴛᴛɪɴɢs', callback_data='openSettings'),
+                InlineKeyboardButton('♥️ Aʙᴏᴜᴛ', callback_data='about')
+                ],
+            [
+                InlineKeyboardButton('⪦ 𝕄𝕆𝕍𝕀𝔼 ℂℍ𝔸ℕℕ𝔼𝕃 ⪧', url='https://t.me/real_MoviesAdda3')
+            ],
+            [
+                InlineKeyboardButton('💸 E𝐚𝐫𝐧 M𝐨𝐧𝐞𝐲 💸', callback_data="shortlink_info")
+            ]
+            ]
+        else:
+            buttons = [[
+            InlineKeyboardButton('↖️ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Gʀᴏᴜᴘs ↗️', url=f'http://t.me/{temp.U_NAME}?startgroup=true')
+            ],[
+            InlineKeyboardButton('🧞‍♀️ Sᴇᴀʀᴄʜ', switch_inline_query_current_chat=''),
+            InlineKeyboardButton('🔍 Gʀᴏᴜᴘ', url=f'https://t.me/{MOVIE_GROUP_USERNAME}')
+            ],[
+            InlineKeyboardButton('🙆🏻 Hᴇʟᴘ', callback_data='help'),
+            InlineKeyboardButton('🎁 Hᴇʟᴘ++ ', callback_data='leech_url_help'),
+            ],[
+                InlineKeyboardButton('⚙ Sᴇᴛᴛɪɴɢs', callback_data='openSettings'),
+                InlineKeyboardButton('♥️ Aʙᴏᴜᴛ', callback_data='about')
+                ],
+            [
+                InlineKeyboardButton('⪦ 𝕄𝕆𝕍𝕀𝔼 ℂℍ𝔸ℕℕ𝔼𝕃 ⪧', url='https://t.me/real_MoviesAdda3')
+            ],
+            [
+                InlineKeyboardButton('🎉 Learn BOT making 🎊', url="https://youtube.com/@LazyDeveloperr")
+            ]
+            ]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_photo(
             photo=random.choice(PICS),
             caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
             reply_markup=reply_markup,
-            parse_mode=enums.ParseMode.HTML,
-            has_spoiler=True
+            parse_mode=enums.ParseMode.HTML
         )
         return
     data = message.command[1]
@@ -196,8 +246,8 @@ async def start(client, message):
             #     print(f"Exception occured : {str(e)}")
             # ./check verfication end
             # LAZY_DIVERTING_CHANNEL_ID = int(environ.get('LAZY_DIVERTING_CHANNEL_ID', '-1004873483784 -10028934982 -1009389843894 -10048934898934').split())
-            # select_random_channel = random.choice(LAZY_DIVERTING_CHANNEL_ID)
-            # SELECTED_CHANNEL = int(select_random_channel)
+            select_random_channel = random.choice(LAZY_DIVERTING_CHANNEL_ID)
+            SELECTED_CHANNEL = int(select_random_channel)
             
             along_with_lazy_info = "**⚠ DELETING IN 10 minute ⚠**"
             along_with_lazy_footer = f"**Dear {message.from_user.mention}"
@@ -205,19 +255,52 @@ async def start(client, message):
             try:
                 # print(f'bot is trying to send file to the selected random channel : {SELECTED_CHANNEL}')
                 lmsg = await client.send_cached_media(
-                    chat_id=message.from_user.id,
+                    chat_id=SELECTED_CHANNEL,
                     file_id=msg.get("file_id"),
                     caption=lazy_caption_template,
                     protect_content=msg.get('protect', False),
                     )
-                btnll = [[
-                    InlineKeyboardButton("❗ ɢᴇᴛ ꜰɪʟᴇ ᴀɢᴀɪɴ ❗", callback_data=f'delfile#{file_id}')
-                            ]]
-                lostz = await client.send_message(chat_id = message.from_user.id, text=f"<b>⚠ <u>warning ⚠</u> </b>\n\n<b>ᴛʜɪꜱ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ</b> <b><u>10 ᴍɪɴᴜᴛᴇꜱ</u> </b><b>(ᴅᴜᴇ ᴛᴏ ᴄᴏᴘʏʀɪɢʜᴛ ɪꜱꜱᴜᴇꜱ).</b>\n\n<b><i>📌 ᴘʟᴇᴀꜱᴇ ꜰᴏʀᴡᴀʀᴅ ᴛʜɪꜱ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ᴛᴏ ꜱᴏᴍᴇᴡʜᴇʀᴇ ᴇʟꜱᴇ ᴀɴᴅ ꜱᴛᴀʀᴛ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ ᴛʜᴇʀᴇ.</i></b>")
+                # print(f'File sent to : {SELECTED_CHANNEL}')
+                invite_link = await client.create_chat_invite_link(int(SELECTED_CHANNEL))
+                lazy_invite_url = invite_link.invite_link
+                # print(lazy_invite_url)
+
+                message_link = await client.get_messages(int(SELECTED_CHANNEL), lmsg.id)
+                file_link = message_link.link
+                # print(file_link)
+                try:
+                    member = await client.get_chat_member(SELECTED_CHANNEL, message.from_user.id)
+                    # print(member)
+                    if member.status != enums.ChatMemberStatus.MEMBER:
+                        fusss = await client.send_message(
+                        chat_id=message.from_user.id,
+                        text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
+                        )
+                        # print(f'User is not subscribed: Got url => {lazy_invite_url}')
+                    else:
+                        fasss = await client.send_message(
+                        chat_id=message.from_user.id,
+                        text=f"🎉You're already a channel member🎊\n\nHere is your direct download link 👇\n\n {file_link} \n\n❤Thank you for staying with the channel, {message.from_user.mention}❤"
+                        )
+                        # print(f'User is subscribed: Got LINK => {file_link}')
+                except UserNotParticipant:
+                    fasssg = await client.send_message(
+                        chat_id=message.from_user.id,
+                        text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
+                    )
+                    # print(f'User is not subscribed: Got url => {lazy_invite_url}')
                 await asyncio.sleep(600)
                 await lmsg.delete()
-                await lostz.edit_text("<b>ʏᴏᴜʀ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ɪꜱ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴅᴇʟᴇᴛᴇᴅ !!\n\nᴄʟɪᴄᴋ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ ʏᴏᴜʀ ᴅᴇʟᴇᴛᴇᴅ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ 👇</b>",reply_markup=InlineKeyboardMarkup(btnll))
+                await fusss.delete()
+                await fasss.delete()
+                await fasssg.delete()
 
+                # await client.send_cached_media(
+                #     chat_id=message.from_user.id,
+                #     file_id=msg.get("file_id"),
+                #     caption=f_caption,
+                #     protect_content=msg.get('protect', False),
+                #     )
             except FloodWait as e:
                 await asyncio.sleep(e.x)
                 logger.warning(f"Floodwait of {e.x} sec.")
@@ -228,7 +311,9 @@ async def start(client, message):
                     protect_content=msg.get('protect', False),
                     reply_markup=InlineKeyboardMarkup(
                         [
-
+                            [
+                                InlineKeyboardButton('▶ Gen Stream / Download Link', callback_data=f'generate_stream_link:{file_id}'),
+                            ],
                             [
                                 InlineKeyboardButton('📌 ᴊᴏɪɴ ᴜᴘᴅᴀᴛᴇꜱ ᴄʜᴀɴɴᴇʟ 📌', url=f'https://t.me/LazyDeveloperr')
                             ]
@@ -325,7 +410,7 @@ async def start(client, message):
                             InlineKeyboardButton('📁 ᴅᴏᴡɴʟᴏᴀᴅ 📁', url=ghost_url)
                         ],
                         [
-                            InlineKeyboardButton('⚡ ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ⚡', url=f"https://t.me/+lI9zStHfHlllNjQ1")
+                            InlineKeyboardButton('🎉 ʙᴜʏ ꜱᴜʙꜱᴄʀɪᴘᴛɪᴏɴ : ʀᴇᴍᴏᴠᴇ ᴀᴅꜱ 🎊', callback_data="seeplans")
                         ]
                     ]
                 )
@@ -341,7 +426,6 @@ async def start(client, message):
         user_id = message.from_user.id
         chat_id = temp.SHORT.get(user_id)
         files_ = await get_file_details(file_id)
-
         files = files_[0]
         ghost = await get_shortlink(chat_id, f"https://telegram.me/{temp.U_NAME}?start=file_{file_id}")
         k = await client.send_message(
@@ -350,9 +434,8 @@ async def start(client, message):
             reply_markup=InlineKeyboardMarkup(
                 [[
                     InlineKeyboardButton('📁 ᴅᴏᴡɴʟᴏᴀᴅ 📁', url=ghost)
-                ],
-                [
-                    InlineKeyboardButton('⚡ ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ⚡', url=f"https://t.me/+lI9zStHfHlllNjQ1")
+                ],[
+                    InlineKeyboardButton('✨ ʙᴜʏ ꜱᴜʙꜱᴄʀɪᴘᴛɪᴏɴ : ʀᴇᴍᴏᴠᴇ ᴀᴅꜱ ✨', callback_data="seeplans")
                 ]]
             )
         )
@@ -388,7 +471,13 @@ async def start(client, message):
                 file_id=file_id,
                 caption=f_caption,
                 protect_content=True if pre == 'filep' else False,
-
+                reply_markup=InlineKeyboardMarkup(
+            [
+             [
+              InlineKeyboardButton('▶ Gen Stream / Download Link', callback_data=f'generate_stream_link:{file_id}'),
+             ]
+            ]
+        )
     )
             filesarr.append(msg)
         k = await client.send_message(chat_id = message.from_user.id, text=f"<b>❗️ <u>ɪᴍᴘᴏʀᴛᴀɴᴛ</u> ❗️</b>\n\n<b>ᴛʜᴇꜱᴇ ᴠɪᴅᴇᴏꜱ / ꜰɪʟᴇꜱ ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ</b> <b><u>10 ᴍɪɴᴜᴛᴇꜱ</u> </b><b>(ᴅᴜᴇ ᴛᴏ ᴄᴏᴘʏʀɪɢʜᴛ ɪꜱꜱᴜᴇꜱ).</b>\n\n<b><i>📌 ᴘʟᴇᴀꜱᴇ ꜰᴏʀᴡᴀʀᴅ ᴛʜᴇꜱᴇ ᴠɪᴅᴇᴏꜱ / ꜰɪʟᴇꜱ ᴛᴏ ꜱᴏᴍᴇᴡʜᴇʀᴇ ᴇʟꜱᴇ ᴀɴᴅ ꜱᴛᴀʀᴛ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ ᴛʜᴇʀᴇ.</i></b>")
@@ -414,16 +503,13 @@ async def start(client, message):
         if not await db.has_prime_status(user_id) and settings['url_mode']:
             files_ = await get_file_details(file_id)
             files = files_[0]
-            print(f"file id is : {file_id}")
-            print(files)
             generatedurl = await get_shortlink(chat_id, f"https://telegram.me/{temp.U_NAME}?start=file_{file_id}")
             k = await client.send_message(chat_id=message.from_user.id,text=f"🫂 ʜᴇʏ {message.from_user.mention}\n\n✅ ʏᴏᴜʀ ʟɪɴᴋ ɪꜱ ʀᴇᴀᴅʏ, ᴋɪɴᴅʟʏ ᴄʟɪᴄᴋ ᴏɴ ᴅᴏᴡɴʟᴏᴀᴅ ʙᴜᴛᴛᴏɴ.\n\n⚠️ ꜰɪʟᴇ ɴᴀᴍᴇ : <code>{files.file_name}</code> \n\n⚕ ꜰɪʟᴇ ꜱɪᴢᴇ : <code>{get_size(files.file_size)}</code>\n\n", reply_markup=InlineKeyboardMarkup(
                     [
                         [
                             InlineKeyboardButton('📁 ᴅᴏᴡɴʟᴏᴀᴅ 📁', url=generatedurl)
-                        ],
-                        [
-                            InlineKeyboardButton('⚡ ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ⚡', url=f"https://t.me/+lI9zStHfHlllNjQ1")
+                        ],[
+                            InlineKeyboardButton('✨ ʙᴜʏ ꜱᴜʙꜱᴄʀɪᴘᴛɪᴏɴ : ʀᴇᴍᴏᴠᴇ ᴀᴅꜱ ✨', callback_data="seeplans")                            
                         ]
                     ]
                 )
@@ -452,47 +538,48 @@ async def start(client, message):
             # except Exception as e:
             #     print(f"Exception occured : {str(e)}")
             # ./check verfication end
-            # select_random_channel = random.choice(LAZY_DIVERTING_CHANNEL_ID)
-            # SELECTED_CHANNEL = select_random_channel
+            select_random_channel = random.choice(LAZY_DIVERTING_CHANNEL_ID)
+            SELECTED_CHANNEL = select_random_channel
             
             # Create the inline keyboard button with callback_data
             button = InlineKeyboardButton('▶ Gen Stream / Download Link', callback_data=f'generate_stream_link:{file_id}')
             # Create the inline keyboard markup with the button
             keyboard = InlineKeyboardMarkup([[button]])
             msg = await client.send_cached_media(
-                chat_id=message.from_user.id,
+                chat_id=SELECTED_CHANNEL,
                 file_id=file_id,
+                reply_markup=keyboard,
                 protect_content=True if pre == 'filep' else False,
                 )
-            # # print(f'File sent to : {SELECTED_CHANNEL}')
-            # invite_link = await client.create_chat_invite_link(int(SELECTED_CHANNEL))
-            # lazy_invite_url = invite_link.invite_link
-            # # print(lazy_invite_url)
+            # print(f'File sent to : {SELECTED_CHANNEL}')
+            invite_link = await client.create_chat_invite_link(int(SELECTED_CHANNEL))
+            lazy_invite_url = invite_link.invite_link
+            # print(lazy_invite_url)
 
-            # message_link = await client.get_messages(int(SELECTED_CHANNEL), msg.id)
-            # file_link = message_link.link
-            # # print(file_link)
-            # try:
-            #     member = await client.get_chat_member(SELECTED_CHANNEL, message.from_user.id)
-            #     # print(member)
-            #     if member.status != enums.ChatMemberStatus.MEMBER:
-            #         fugg = await client.send_message(
-            #         chat_id=message.from_user.id,
-            #         text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
-            #         )
-            #         # print(f'User is not subscribed: Got url => {lazy_invite_url}')
-            #     else:
-            #         fagg = await client.send_message(
-            #         chat_id=message.from_user.id,
-            #         text=f"🎉You're already a channel member🎊\n\nHere is your direct download link 👇\n\n {file_link} \n\n❤Thank you for staying with the channel, {message.from_user.mention}❤"
-            #         )
-            #         # print(f'User is subscribed: Got LINK => {file_link}')
-            # except UserNotParticipant:
-            #     faggu = await client.send_message(
-            #         chat_id=message.from_user.id,
-            #         text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
-            #     )
-            #     # print(f'User is not subscribed: Got url => {lazy_invite_url}')
+            message_link = await client.get_messages(int(SELECTED_CHANNEL), msg.id)
+            file_link = message_link.link
+            # print(file_link)
+            try:
+                member = await client.get_chat_member(SELECTED_CHANNEL, message.from_user.id)
+                # print(member)
+                if member.status != enums.ChatMemberStatus.MEMBER:
+                    fugg = await client.send_message(
+                    chat_id=message.from_user.id,
+                    text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
+                    )
+                    # print(f'User is not subscribed: Got url => {lazy_invite_url}')
+                else:
+                    fagg = await client.send_message(
+                    chat_id=message.from_user.id,
+                    text=f"🎉You're already a channel member🎊\n\nHere is your direct download link 👇\n\n {file_link} \n\n❤Thank you for staying with the channel, {message.from_user.mention}❤"
+                    )
+                    # print(f'User is subscribed: Got LINK => {file_link}')
+            except UserNotParticipant:
+                faggu = await client.send_message(
+                    chat_id=message.from_user.id,
+                    text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
+                )
+                # print(f'User is not subscribed: Got url => {lazy_invite_url}')
             
             filetype = msg.media
             file = getattr(msg, filetype.value)
@@ -554,8 +641,8 @@ async def start(client, message):
     # except Exception as e:
     #     print(f"Exception occured : {str(e)}")
     # ./check verfication end
-    # select_random_channel = random.choice(LAZY_DIVERTING_CHANNEL_ID)
-    # SELECTED_CHANNEL = select_random_channel
+    select_random_channel = random.choice(LAZY_DIVERTING_CHANNEL_ID)
+    SELECTED_CHANNEL = select_random_channel
     along_with_lazy_info = "**⚠ DELETING IN 10 minute ⚠**"
     along_with_lazy_footer = f"**Dear {message.from_user.mention} ! Please forward this file to other chat or saved message ❤"
     lazy_caption_template =f"{along_with_lazy_info}\n\n{f_caption}\n\n{along_with_lazy_footer}"
@@ -564,40 +651,40 @@ async def start(client, message):
     # Create the inline keyboard markup with the button
     keyboard = InlineKeyboardMarkup([[button]])
     lazy_file = await client.send_cached_media(
-        chat_id=message.from_user.id,
+        chat_id=SELECTED_CHANNEL,
         file_id=file_id,
         caption=lazy_caption_template,
         reply_markup=keyboard,  # Use the created keyboard
         protect_content=True if pre == 'filep' else False,
         )
-    # # print(f'File sent to : {SELECTED_CHANNEL}')
-    # invite_link = await client.create_chat_invite_link(int(SELECTED_CHANNEL))
-    # lazy_invite_url = invite_link.invite_link
-    # # print(lazy_invite_url)
+    # print(f'File sent to : {SELECTED_CHANNEL}')
+    invite_link = await client.create_chat_invite_link(int(SELECTED_CHANNEL))
+    lazy_invite_url = invite_link.invite_link
+    # print(lazy_invite_url)
 
-    # message_link = await client.get_messages(int(SELECTED_CHANNEL), lazy_file.id)
-    # file_link = message_link.link
-    # # print(file_link)
-    # try:
-    #     member = await client.get_chat_member(SELECTED_CHANNEL, message.from_user.id)
-    #     # print(member)
-    #     if member.status != enums.ChatMemberStatus.MEMBER:
-    #         fussx = await client.send_message(
-    #         chat_id=message.from_user.id,
-    #         text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
-    #         )
-    #         # print(f'User is not subscribed: Got url => {lazy_invite_url}')
-    #     else:
-    #         fassx = await client.send_message(
-    #         chat_id=message.from_user.id,
-    #         text=f"🎉You're already a channel member🎊\n\nHere is your direct download link 👇\n\n {file_link} \n\n❤Thank you for staying with the channel, {message.from_user.mention}❤"
-    #         )
-    #         # print(f'User is subscribed: Got LINK => {file_link}')
-    # except UserNotParticipant:
-    #     fassxx = await client.send_message(
-    #         chat_id=message.from_user.id,
-    #         text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
-    #     )
+    message_link = await client.get_messages(int(SELECTED_CHANNEL), lazy_file.id)
+    file_link = message_link.link
+    # print(file_link)
+    try:
+        member = await client.get_chat_member(SELECTED_CHANNEL, message.from_user.id)
+        # print(member)
+        if member.status != enums.ChatMemberStatus.MEMBER:
+            fussx = await client.send_message(
+            chat_id=message.from_user.id,
+            text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
+            )
+            # print(f'User is not subscribed: Got url => {lazy_invite_url}')
+        else:
+            fassx = await client.send_message(
+            chat_id=message.from_user.id,
+            text=f"🎉You're already a channel member🎊\n\nHere is your direct download link 👇\n\n {file_link} \n\n❤Thank you for staying with the channel, {message.from_user.mention}❤"
+            )
+            # print(f'User is subscribed: Got LINK => {file_link}')
+    except UserNotParticipant:
+        fassxx = await client.send_message(
+            chat_id=message.from_user.id,
+            text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
+        )
         # print(f'User is not subscribed: Got url => {lazy_invite_url}')
     
        
@@ -618,17 +705,14 @@ async def start(client, message):
     #             InlineKeyboardButton("❗ ɢᴇᴛ ꜰɪʟᴇ ᴀɢᴀɪɴ ❗", callback_data=f'delfile#{file_id}')
     #             ]]
     # lzzz = await client.send_message(chat_id = message.from_user.id, text=f"<b>⚠ <u>warning ⚠</u> </b>\n\n<b>ᴛʜɪꜱ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ</b> <b><u>30 ᴍɪɴᴜᴛᴇꜱ</u> </b><b>(ᴅᴜᴇ ᴛᴏ ᴄᴏᴘʏʀɪɢʜᴛ ɪꜱꜱᴜᴇꜱ).</b>\n\n<b><i>📌 ᴘʟᴇᴀꜱᴇ ꜰᴏʀᴡᴀʀᴅ ᴛʜɪꜱ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ᴛᴏ ꜱᴏᴍᴇᴡʜᴇʀᴇ ᴇʟꜱᴇ ᴀɴᴅ ꜱᴛᴀʀᴛ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ ᴛʜᴇʀᴇ.</i></b>")
-
-    btnl = [[
-                InlineKeyboardButton("❗ ɢᴇᴛ ꜰɪʟᴇ ᴀɢᴀɪɴ ❗", callback_data=f'delfile#{file_id}')
-                ]]
-    lzzz = await client.send_message(chat_id = message.from_user.id, text=f"<b>⚠ <u>warning ⚠</u> </b>\n\n<b>ᴛʜɪꜱ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ</b> <b><u>10 ᴍɪɴᴜᴛᴇꜱ</u> </b><b>(ᴅᴜᴇ ᴛᴏ ᴄᴏᴘʏʀɪɢʜᴛ ɪꜱꜱᴜᴇꜱ).</b>\n\n<b><i>📌 ᴘʟᴇᴀꜱᴇ ꜰᴏʀᴡᴀʀᴅ ᴛʜɪꜱ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ᴛᴏ ꜱᴏᴍᴇᴡʜᴇʀᴇ ᴇʟꜱᴇ ᴀɴᴅ ꜱᴛᴀʀᴛ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ ᴛʜᴇʀᴇ.</i></b>")
     await asyncio.sleep(600)
     # print('reached auto delete lazyfile')
 
     await lazy_file.delete()
-
-    await lzzz.edit_text("<b>ʏᴏᴜʀ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ɪꜱ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴅᴇʟᴇᴛᴇᴅ !!\n\nᴄʟɪᴄᴋ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ ʏᴏᴜʀ ᴅᴇʟᴇᴛᴇᴅ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ 👇</b>",reply_markup=InlineKeyboardMarkup(btnl))
+    await fussx.delete()
+    await fassx.delete()
+    await fassxx.delete()
+    # await lzzz.edit_text("<b>ʏᴏᴜʀ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ɪꜱ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴅᴇʟᴇᴛᴇᴅ !!\n\nᴄʟɪᴄᴋ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ ʏᴏᴜʀ ᴅᴇʟᴇᴛᴇᴅ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ 👇</b>",reply_markup=InlineKeyboardMarkup(btnl))
 
 
 @Client.on_message(filters.command('channels') & filters.user(ADMINS))
@@ -786,7 +870,8 @@ async def settings(client, message):
     else:
         pass
     if settings is not None:
-        buttons = [
+        if message.from_user.id in ADMINS:
+            buttons = [
                 [
                     InlineKeyboardButton('URL Mode',
                                         callback_data=f'setgs#url_mode#{settings["url_mode"]}#{str(grp_id)}'),
@@ -853,7 +938,10 @@ async def settings(client, message):
                     ),
                 ],
             ]
-        
+        else:
+            buttons = [
+                [InlineKeyboardButton("Contact Developer", url=f"https://t.me/LazyDeveloperr")]
+            ]
         reply_markup = InlineKeyboardMarkup(buttons)
 
         await message.reply_text(
@@ -907,255 +995,255 @@ async def save_template(client, message):
     await save_group_settings(grp_id, 'template', template)
     await sts.edit(f"Successfully changed template for {title} to\n\n{template}")
 
-# @Client.on_message(filters.command("add_prime") & filters.user(ADMINS))
-# async def add_prime_status(client, message):
-#     try:
-#         if len(message.command) == 4:
-#             time_zone = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
-#             current_time = time_zone.strftime("%d-%m-%Y\n⏱️ Joining time : %I:%M:%S %p") 
-#             user_id = int(message.command[1])  # Convert the user_id to integer
-#             user = await client.get_users(user_id)
-#             time = message.command[2]+" "+message.command[3]
-#             seconds = await get_seconds(time)
-#             if seconds > 0:
-#                 expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
-#                 user_data = {"id": user_id, "expiry_time": expiry_time}  # Using "id" instead of "user_id"  
-#                 await db.update_user(user_data)  # Use the update_user method to update or insert user data
-#                 data = await db.get_user(user_id)
-#                 expiry = data.get("expiry_time")   
-#                 expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")         
-#                 await message.reply_text(f"{user.mention} Added to Prime list ✅\n\n👤 Name : {user.mention}\n⚡ ID : <code>{user_id}</code>\n⏰ Limit : <code>{time}</code>\n\n⏳ Joining Date : {current_time}\n\n⌛️ Exp Date : {expiry_str_in_ist}", disable_web_page_preview=True)
-#                 await client.send_message(
-#                     chat_id=user_id,
-#                     text=f"👋 ʜᴇʏ {user.mention},\nThank you for purchasing prime membership.\n\n⏰ LIMIT : <code>{time}</code>\n⏳ Joining Date : {current_time}\n\n⌛️ Exp Date : {expiry_str_in_ist}", disable_web_page_preview=True              
-#                 )
-#                 await client.send_message(PRIME_MEMBERS_LOGS, text=f"#New Prime member \n\n👤 Name : {user.mention}\n⚡ ID : <code>{user_id}</code>\n⏰ LIMIT : <code>{time}</code>\n\n⏳ Joining Date : {current_time}\n\n⌛️ Exp Date : {expiry_str_in_ist}", disable_web_page_preview=True)
+@Client.on_message(filters.command("add_prime") & filters.user(ADMINS))
+async def add_prime_status(client, message):
+    try:
+        if len(message.command) == 4:
+            time_zone = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+            current_time = time_zone.strftime("%d-%m-%Y\n⏱️ Joining time : %I:%M:%S %p") 
+            user_id = int(message.command[1])  # Convert the user_id to integer
+            user = await client.get_users(user_id)
+            time = message.command[2]+" "+message.command[3]
+            seconds = await get_seconds(time)
+            if seconds > 0:
+                expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=seconds)
+                user_data = {"id": user_id, "expiry_time": expiry_time}  # Using "id" instead of "user_id"  
+                await db.update_user(user_data)  # Use the update_user method to update or insert user data
+                data = await db.get_user(user_id)
+                expiry = data.get("expiry_time")   
+                expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")         
+                await message.reply_text(f"{user.mention} Added to Prime list ✅\n\n👤 Name : {user.mention}\n⚡ ID : <code>{user_id}</code>\n⏰ Limit : <code>{time}</code>\n\n⏳ Joining Date : {current_time}\n\n⌛️ Exp Date : {expiry_str_in_ist}", disable_web_page_preview=True)
+                await client.send_message(
+                    chat_id=user_id,
+                    text=f"👋 ʜᴇʏ {user.mention},\nThank you for purchasing prime membership.\n\n⏰ LIMIT : <code>{time}</code>\n⏳ Joining Date : {current_time}\n\n⌛️ Exp Date : {expiry_str_in_ist}", disable_web_page_preview=True              
+                )
+                await client.send_message(PRIME_MEMBERS_LOGS, text=f"#New Prime member \n\n👤 Name : {user.mention}\n⚡ ID : <code>{user_id}</code>\n⏰ LIMIT : <code>{time}</code>\n\n⏳ Joining Date : {current_time}\n\n⌛️ Exp Date : {expiry_str_in_ist}", disable_web_page_preview=True)
 
-#             else:
-#                 await message.reply_text("Invalid time format. Please use '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year'")
-#         else:
-#             await message.reply_text("Usage : /add_prime user_id time (e.g., '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year')")
-#     except Exception as e:
-#         print(e)
+            else:
+                await message.reply_text("Invalid time format. Please use '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year'")
+        else:
+            await message.reply_text("Usage : /add_prime user_id time (e.g., '1 day for days', '1 hour for hours', or '1 min for minutes', or '1 month for months' or '1 year for year')")
+    except Exception as e:
+        print(e)
         
-# @Client.on_message(filters.command("remove_prime") & filters.user(ADMINS))
-# async def remove_prime(client, message):
-#     if len(message.command) == 2:
-#         user_id = int(message.command[1])  # Convert the user_id to integer
-#         user = await client.get_users(user_id)
-#         if await db.remove_prime_status(user_id):
-#             await message.reply_text("User removed  successfully! ✔")
-#             await client.send_message(
-#                 chat_id=user_id,
-#                 text=f"<b>ʜᴇʏ {user.mention},\n\nʏᴏᴜʀ ᴘʀɪᴍᴇ ᴀᴄᴄᴇss ʜᴀs ʙᴇᴇɴ ʀᴇᴍᴏᴠᴇᴅ.\nᴛʜᴀɴᴋ ʏᴏᴜ ꜰᴏʀ ᴜsɪɴɢ ᴏᴜʀ sᴇʀᴠɪᴄᴇ 😊\nᴄʟɪᴄᴋ ᴏɴ /plan ᴛᴏ ᴄʜᴇᴄᴋ ᴏᴜᴛ ᴏᴛʜᴇʀ ᴘʟᴀɴꜱ.</b>"
-#             )
-#         else:
-#             await message.reply_text("ᴜɴᴀʙʟᴇ ᴛᴏ ʀᴇᴍᴏᴠᴇ ᴜꜱᴇʀ !\nᴀʀᴇ ʏᴏᴜ ꜱᴜʀᴇ, ɪᴛ ᴡᴀꜱ ᴀ ᴘʀɪᴍᴇ ᴜꜱᴇʀ ɪᴅ ?")
-#     else:
-#         await message.reply_text("ᴜꜱᴀɢᴇ : /remove_prime user_id") 
+@Client.on_message(filters.command("remove_prime") & filters.user(ADMINS))
+async def remove_prime(client, message):
+    if len(message.command) == 2:
+        user_id = int(message.command[1])  # Convert the user_id to integer
+        user = await client.get_users(user_id)
+        if await db.remove_prime_status(user_id):
+            await message.reply_text("User removed  successfully! ✔")
+            await client.send_message(
+                chat_id=user_id,
+                text=f"<b>ʜᴇʏ {user.mention},\n\nʏᴏᴜʀ ᴘʀɪᴍᴇ ᴀᴄᴄᴇss ʜᴀs ʙᴇᴇɴ ʀᴇᴍᴏᴠᴇᴅ.\nᴛʜᴀɴᴋ ʏᴏᴜ ꜰᴏʀ ᴜsɪɴɢ ᴏᴜʀ sᴇʀᴠɪᴄᴇ 😊\nᴄʟɪᴄᴋ ᴏɴ /plan ᴛᴏ ᴄʜᴇᴄᴋ ᴏᴜᴛ ᴏᴛʜᴇʀ ᴘʟᴀɴꜱ.</b>"
+            )
+        else:
+            await message.reply_text("ᴜɴᴀʙʟᴇ ᴛᴏ ʀᴇᴍᴏᴠᴇ ᴜꜱᴇʀ !\nᴀʀᴇ ʏᴏᴜ ꜱᴜʀᴇ, ɪᴛ ᴡᴀꜱ ᴀ ᴘʀɪᴍᴇ ᴜꜱᴇʀ ɪᴅ ?")
+    else:
+        await message.reply_text("ᴜꜱᴀɢᴇ : /remove_prime user_id") 
 
-# @Client.on_message(filters.command("get_prime") & filters.user(ADMINS))
-# async def get_prime_status(client, message):
-#     if len(message.command) == 2:
-#         user_id = int(message.command[1])
-#         user = await client.get_users(user_id)
-#         data = await db.get_user(user_id)  # Convert the user_id to integer
-#         if data and data.get("expiry_time"):
-#             #expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=data)
-#             expiry = data.get("expiry_time") 
-#             expiry_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata"))
-#             expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")            
-#             # Calculate time difference
-#             current_time = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
-#             time_left = expiry_ist - current_time
+@Client.on_message(filters.command("get_prime") & filters.user(ADMINS))
+async def get_prime_status(client, message):
+    if len(message.command) == 2:
+        user_id = int(message.command[1])
+        user = await client.get_users(user_id)
+        data = await db.get_user(user_id)  # Convert the user_id to integer
+        if data and data.get("expiry_time"):
+            #expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=data)
+            expiry = data.get("expiry_time") 
+            expiry_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata"))
+            expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")            
+            # Calculate time difference
+            current_time = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+            time_left = expiry_ist - current_time
             
-#             # Calculate days, hours, and minutes
-#             days = time_left.days
-#             hours, remainder = divmod(time_left.seconds, 3600)
-#             minutes, seconds = divmod(remainder, 60)
+            # Calculate days, hours, and minutes
+            days = time_left.days
+            hours, remainder = divmod(time_left.seconds, 3600)
+            minutes, seconds = divmod(remainder, 60)
             
-#             # Format time left as a string
-#             time_left_str = f"{days} days, {hours} hours, {minutes} minutes"
-#             await message.reply_text(f"⚜️ ᴘʀɪᴍᴇ ᴜꜱᴇʀ ᴅᴀᴛᴀ :\n\n👤 ᴜꜱᴇʀ : {user.mention}\n⚡ ᴜꜱᴇʀ ɪᴅ : <code>{user_id}</code>\n⏰ ᴛɪᴍᴇ ʟᴇꜰᴛ : {time_left_str}\n⌛️ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist}")
-#         else:
-#             await message.reply_text("ɴᴏ ᴀɴʏ ᴘʀɪᴍᴇ ᴅᴀᴛᴀ ᴡᴀꜱ ꜰᴏᴜɴᴅ ɪɴ ᴅᴀᴛᴀʙᴀꜱᴇ !")
-#     else:
-#         await message.reply_text("ᴜꜱᴀɢᴇ : /get_prime user_id")
+            # Format time left as a string
+            time_left_str = f"{days} days, {hours} hours, {minutes} minutes"
+            await message.reply_text(f"⚜️ ᴘʀɪᴍᴇ ᴜꜱᴇʀ ᴅᴀᴛᴀ :\n\n👤 ᴜꜱᴇʀ : {user.mention}\n⚡ ᴜꜱᴇʀ ɪᴅ : <code>{user_id}</code>\n⏰ ᴛɪᴍᴇ ʟᴇꜰᴛ : {time_left_str}\n⌛️ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist}")
+        else:
+            await message.reply_text("ɴᴏ ᴀɴʏ ᴘʀɪᴍᴇ ᴅᴀᴛᴀ ᴡᴀꜱ ꜰᴏᴜɴᴅ ɪɴ ᴅᴀᴛᴀʙᴀꜱᴇ !")
+    else:
+        await message.reply_text("ᴜꜱᴀɢᴇ : /get_prime user_id")
 
-# @Client.on_message(filters.command("prime_users") & filters.user(ADMINS))
-# async def prime_user(client, message):
-#     aa = await message.reply_text("<i>Please wait...</i>")
-#     new = f"⚜️ ᴘʀɪᴍᴇ ᴜꜱᴇʀꜱ ʟɪꜱᴛ :\n\n"
-#     user_count = 1
+@Client.on_message(filters.command("prime_users") & filters.user(ADMINS))
+async def prime_user(client, message):
+    aa = await message.reply_text("<i>Please wait...</i>")
+    new = f"⚜️ ᴘʀɪᴍᴇ ᴜꜱᴇʀꜱ ʟɪꜱᴛ :\n\n"
+    user_count = 1
 
-#     try:
-#         users = await db.get_all_users()
-#         logging.debug(f"Fetched {len(users)} users")
-#     except Exception as e:
-#         logging.error(f"Error fetching users: {e}")
-#         await aa.edit_text("Failed to fetch users.")
-#         return
+    try:
+        users = await db.get_all_users()
+        logging.debug(f"Fetched {len(users)} users")
+    except Exception as e:
+        logging.error(f"Error fetching users: {e}")
+        await aa.edit_text("Failed to fetch users.")
+        return
 
-#     async for user in users:
-#         try:
-#             data = await db.get_user(user['id'])
-#             logging.debug(f"Fetched data for user {user['id']}: {data}")
+    async for user in users:
+        try:
+            data = await db.get_user(user['id'])
+            logging.debug(f"Fetched data for user {user['id']}: {data}")
             
-#             if data and data.get("expiry_time"):
-#                 expiry = data.get("expiry_time")
-#                 expiry_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata"))
-#                 expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")
-#                 current_time = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
-#                 time_left = expiry_ist - current_time
-#                 days = time_left.days
-#                 hours, remainder = divmod(time_left.seconds, 3600)
-#                 minutes, seconds = divmod(remainder, 60)
-#                 time_left_str = f"{days} days, {hours} hours, {minutes} minutes"
+            if data and data.get("expiry_time"):
+                expiry = data.get("expiry_time")
+                expiry_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata"))
+                expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")
+                current_time = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+                time_left = expiry_ist - current_time
+                days = time_left.days
+                hours, remainder = divmod(time_left.seconds, 3600)
+                minutes, seconds = divmod(remainder, 60)
+                time_left_str = f"{days} days, {hours} hours, {minutes} minutes"
                 
-#                 new += f"{user_count}. {(await client.get_users(user['id'])).mention}\n👤 ᴜꜱᴇʀ ɪᴅ : {user['id']}\n⏳ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist}\n⏰ ᴛɪᴍᴇ ʟᴇꜰᴛ : {time_left_str}\n"
-#                 user_count += 1
-#         except Exception as e:
-#             logging.error(f"Error processing user {user['id']}: {e}")
-#             continue
+                new += f"{user_count}. {(await client.get_users(user['id'])).mention}\n👤 ᴜꜱᴇʀ ɪᴅ : {user['id']}\n⏳ ᴇxᴘɪʀʏ ᴅᴀᴛᴇ : {expiry_str_in_ist}\n⏰ ᴛɪᴍᴇ ʟᴇꜰᴛ : {time_left_str}\n"
+                user_count += 1
+        except Exception as e:
+            logging.error(f"Error processing user {user['id']}: {e}")
+            continue
 
-#     try:
-#         await aa.edit_text(new)
-#     except MessageTooLong:
-#         with open('usersplan.txt', 'w+') as outfile:
-#             outfile.write(new)
-#         await message.reply_document('usersplan.txt', caption="Paid Users:")
-#     except Exception as e:
-#         logging.error(f"Error editing message: {e}")
-#         await aa.edit_text("Failed to send the user list.")
+    try:
+        await aa.edit_text(new)
+    except MessageTooLong:
+        with open('usersplan.txt', 'w+') as outfile:
+            outfile.write(new)
+        await message.reply_document('usersplan.txt', caption="Paid Users:")
+    except Exception as e:
+        logging.error(f"Error editing message: {e}")
+        await aa.edit_text("Failed to send the user list.")
 
-# @Client.on_message(filters.command("myplan"))
-# async def myplan(client, message):
-#     user = message.from_user.mention 
-#     user_id = message.from_user.id
-#     data = await db.get_user(message.from_user.id)  # Convert the user_id to integer
-#     if data and data.get("expiry_time"):
-#         #expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=data)
-#         expiry = data.get("expiry_time") 
-#         expiry_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata"))
-#         expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")            
-#         # Calculate time difference
-#         current_time = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
-#         time_left = expiry_ist - current_time
+@Client.on_message(filters.command("myplan"))
+async def myplan(client, message):
+    user = message.from_user.mention 
+    user_id = message.from_user.id
+    data = await db.get_user(message.from_user.id)  # Convert the user_id to integer
+    if data and data.get("expiry_time"):
+        #expiry_time = datetime.datetime.now() + datetime.timedelta(seconds=data)
+        expiry = data.get("expiry_time") 
+        expiry_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata"))
+        expiry_str_in_ist = expiry.astimezone(pytz.timezone("Asia/Kolkata")).strftime("%d-%m-%Y\n⏱️ ᴇxᴘɪʀʏ ᴛɪᴍᴇ : %I:%M:%S %p")            
+        # Calculate time difference
+        current_time = datetime.datetime.now(pytz.timezone("Asia/Kolkata"))
+        time_left = expiry_ist - current_time
             
-#         # Calculate days, hours, and minutes
-#         days = time_left.days
-#         hours, remainder = divmod(time_left.seconds, 3600)
-#         minutes, seconds = divmod(remainder, 60)
+        # Calculate days, hours, and minutes
+        days = time_left.days
+        hours, remainder = divmod(time_left.seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
             
-#         # Format time left as a string
-#         time_left_str = f"{days} ᴅᴀʏꜱ, {hours} ʜᴏᴜʀꜱ, {minutes} ᴍɪɴᴜᴛᴇꜱ"
-#         await message.reply_text(f"👑 ᴘʀɪᴍᴇ ᴜꜱᴇʀ ᴅᴀᴛᴀ :\n\n👤 Name : {user}\n⚡ ID : <code>{user_id}</code>\n⏰ Time Left : {time_left_str}\n⌛️ Exp Date : {expiry_str_in_ist}")   
-#     else:
-#         await message.reply_text(f"ʜᴇʏ {user},\n\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴀɴʏ ᴀᴄᴛɪᴠᴇ ᴘʀɪᴍᴇ ᴘʟᴀɴs, ɪꜰ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴛᴀᴋᴇ ᴘʀɪᴍᴇ ᴛʜᴇɴ ᴄʟɪᴄᴋ ᴏɴ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ 👇",
-# 	reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("💸 ᴄʜᴇᴄᴋᴏᴜᴛ ᴘʀɪᴍᴇ ᴘʟᴀɴꜱ 💸", callback_data='seeplans')]]))			 
+        # Format time left as a string
+        time_left_str = f"{days} ᴅᴀʏꜱ, {hours} ʜᴏᴜʀꜱ, {minutes} ᴍɪɴᴜᴛᴇꜱ"
+        await message.reply_text(f"👑 ᴘʀɪᴍᴇ ᴜꜱᴇʀ ᴅᴀᴛᴀ :\n\n👤 Name : {user}\n⚡ ID : <code>{user_id}</code>\n⏰ Time Left : {time_left_str}\n⌛️ Exp Date : {expiry_str_in_ist}")   
+    else:
+        await message.reply_text(f"ʜᴇʏ {user},\n\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴀɴʏ ᴀᴄᴛɪᴠᴇ ᴘʀɪᴍᴇ ᴘʟᴀɴs, ɪꜰ ʏᴏᴜ ᴡᴀɴᴛ ᴛᴏ ᴛᴀᴋᴇ ᴘʀɪᴍᴇ ᴛʜᴇɴ ᴄʟɪᴄᴋ ᴏɴ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ 👇",
+	reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("💸 ᴄʜᴇᴄᴋᴏᴜᴛ ᴘʀɪᴍᴇ ᴘʟᴀɴꜱ 💸", callback_data='seeplans')]]))			 
 
-# @Client.on_message(filters.command("plan"))
-# async def plan(client, message):
-#     user_id = message.from_user.id 
-#     users = message.from_user.mention 
-#     btn = [[
+@Client.on_message(filters.command("plan"))
+async def plan(client, message):
+    user_id = message.from_user.id 
+    users = message.from_user.mention 
+    btn = [[
 	
-#         InlineKeyboardButton("📲 ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ꜱᴄʀᴇᴇɴꜱʜᴏᴛ ʜᴇʀᴇ", url=f"https://t.me/{ADMIN_USRNM}")],[InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")
-#     ]]
-#     await message.reply_photo(photo="https://telegra.ph/file/ca18e2c794f4ea1c3135b.jpg", caption=script.PLANS_TXT.format(message.from_user.mention, UPI_ID, QR_CODE_IMG), reply_markup=InlineKeyboardMarkup(btn), parse_mode=enums.ParseMode.HTML)
+        InlineKeyboardButton("📲 ꜱᴇɴᴅ ᴘᴀʏᴍᴇɴᴛ ꜱᴄʀᴇᴇɴꜱʜᴏᴛ ʜᴇʀᴇ", url=f"https://t.me/{ADMIN_USRNM}")],[InlineKeyboardButton("❌ ᴄʟᴏꜱᴇ ❌", callback_data="close_data")
+    ]]
+    await message.reply_photo(photo="https://telegra.ph/file/ca18e2c794f4ea1c3135b.jpg", caption=script.PLANS_TXT.format(message.from_user.mention, UPI_ID, QR_CODE_IMG), reply_markup=InlineKeyboardMarkup(btn), parse_mode=enums.ParseMode.HTML)
 
-# @Client.on_message(filters.command("shortlink"))
-# async def shortlink(bot, message):
-#     userid = message.from_user.id if message.from_user else None
-#     if not userid:
-#         return await message.reply(f"ʏᴏᴜ'ʀᴇ ᴀɴᴏɴʏᴍᴏᴜꜱ ᴀᴅᴍɪɴ, ᴛᴜʀɴ ᴏꜰꜰ ᴀɴᴏɴʏᴍᴏᴜꜱ ᴀᴅᴍɪɴ ᴀɴᴅ ᴛʀʏ ᴛʜɪꜱ ᴀɢᴀɪɴ ᴄᴏᴍᴍᴀɴᴅ.")
-#     chat_type = message.chat.type
-#     if chat_type == enums.ChatType.PRIVATE:
-#         return await message.reply_text(f"<b>ʜᴇʏ {message.from_user.mention}, ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ᴏɴʟʏ ᴡᴏʀᴋꜱ ɪɴ ɢʀᴏᴜᴘꜱ !")
-#     elif chat_type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-#         grpid = message.chat.id
-#         title = message.chat.title
-#     else:
-#         return
-#     data = message.text
-#     userid = message.from_user.id
-#     user = await bot.get_chat_member(grpid, userid)
-#     if user.status != enums.ChatMemberStatus.ADMINISTRATOR and user.status != enums.ChatMemberStatus.OWNER and str(userid) not in ADMINS:
-#         return await message.reply_text("<b>ʏᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴀᴄᴄᴇꜱꜱ ᴛᴏ ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ !\nᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ᴏɴʟʏ ᴡᴏʀᴋꜱ ꜰᴏʀ ɢʀᴏᴜᴘ ᴀᴅᴍɪɴꜱ.</b>")
-#     else:
-#         pass
-#     try:
-#         command, shortlink_url, api = data.split(" ")
-#     except:
-#         return await message.reply_text("<b>ᴄᴏᴍᴍᴀɴᴅ ɪɴᴄᴏᴍᴘʟᴇᴛᴇ !\nɢɪᴠᴇ ᴍᴇ ᴄᴏᴍᴍᴀɴᴅ ᴀʟᴏɴɢ ᴡɪᴛʜ ꜱʜᴏʀᴛɴᴇʀ ᴡᴇʙꜱɪᴛᴇ ᴀɴᴅ ᴀᴘɪ.\n\nꜰᴏʀᴍᴀᴛ : <code>/shortlink krishnalink.com c8dacdff6e91a8e4b4f093fdb4d8ae31bc273c1a</code>")
-#     reply = await message.reply_text("<b>ᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ...</b>")
-#     shortlink_url = re.sub(r"https?://?", "", shortlink_url)
-#     shortlink_url = re.sub(r"[:/]", "", shortlink_url)
-#     await save_group_settings(grpid, 'shortlink', shortlink_url)
-#     await save_group_settings(grpid, 'shortlink_api', api)
-#     await save_group_settings(grpid, 'url_mode', True)
-#     await reply.edit_text(f"<b>✅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴀᴅᴅᴇᴅ ꜱʜᴏʀᴛʟɪɴᴋ ꜰᴏʀ <code>{title}</code>.\n\nꜱʜᴏʀᴛʟɪɴᴋ ᴡᴇʙꜱɪᴛᴇ : <code>{shortlink_url}</code>\nꜱʜᴏʀᴛʟɪɴᴋ ᴀᴘɪ : <code>{api}</code></b>")
+@Client.on_message(filters.command("shortlink"))
+async def shortlink(bot, message):
+    userid = message.from_user.id if message.from_user else None
+    if not userid:
+        return await message.reply(f"ʏᴏᴜ'ʀᴇ ᴀɴᴏɴʏᴍᴏᴜꜱ ᴀᴅᴍɪɴ, ᴛᴜʀɴ ᴏꜰꜰ ᴀɴᴏɴʏᴍᴏᴜꜱ ᴀᴅᴍɪɴ ᴀɴᴅ ᴛʀʏ ᴛʜɪꜱ ᴀɢᴀɪɴ ᴄᴏᴍᴍᴀɴᴅ.")
+    chat_type = message.chat.type
+    if chat_type == enums.ChatType.PRIVATE:
+        return await message.reply_text(f"<b>ʜᴇʏ {message.from_user.mention}, ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ᴏɴʟʏ ᴡᴏʀᴋꜱ ɪɴ ɢʀᴏᴜᴘꜱ !")
+    elif chat_type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+        grpid = message.chat.id
+        title = message.chat.title
+    else:
+        return
+    data = message.text
+    userid = message.from_user.id
+    user = await bot.get_chat_member(grpid, userid)
+    if user.status != enums.ChatMemberStatus.ADMINISTRATOR and user.status != enums.ChatMemberStatus.OWNER and str(userid) not in ADMINS:
+        return await message.reply_text("<b>ʏᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴀᴄᴄᴇꜱꜱ ᴛᴏ ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ !\nᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ᴏɴʟʏ ᴡᴏʀᴋꜱ ꜰᴏʀ ɢʀᴏᴜᴘ ᴀᴅᴍɪɴꜱ.</b>")
+    else:
+        pass
+    try:
+        command, shortlink_url, api = data.split(" ")
+    except:
+        return await message.reply_text("<b>ᴄᴏᴍᴍᴀɴᴅ ɪɴᴄᴏᴍᴘʟᴇᴛᴇ !\nɢɪᴠᴇ ᴍᴇ ᴄᴏᴍᴍᴀɴᴅ ᴀʟᴏɴɢ ᴡɪᴛʜ ꜱʜᴏʀᴛɴᴇʀ ᴡᴇʙꜱɪᴛᴇ ᴀɴᴅ ᴀᴘɪ.\n\nꜰᴏʀᴍᴀᴛ : <code>/shortlink krishnalink.com c8dacdff6e91a8e4b4f093fdb4d8ae31bc273c1a</code>")
+    reply = await message.reply_text("<b>ᴘʟᴇᴀꜱᴇ ᴡᴀɪᴛ...</b>")
+    shortlink_url = re.sub(r"https?://?", "", shortlink_url)
+    shortlink_url = re.sub(r"[:/]", "", shortlink_url)
+    await save_group_settings(grpid, 'shortlink', shortlink_url)
+    await save_group_settings(grpid, 'shortlink_api', api)
+    await save_group_settings(grpid, 'url_mode', True)
+    await reply.edit_text(f"<b>✅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴀᴅᴅᴇᴅ ꜱʜᴏʀᴛʟɪɴᴋ ꜰᴏʀ <code>{title}</code>.\n\nꜱʜᴏʀᴛʟɪɴᴋ ᴡᴇʙꜱɪᴛᴇ : <code>{shortlink_url}</code>\nꜱʜᴏʀᴛʟɪɴᴋ ᴀᴘɪ : <code>{api}</code></b>")
 
-# @Client.on_message(filters.command("setshortlinkoff") & filters.user(ADMINS))
-# async def offshortlink(bot, message):
-#     chat_type = message.chat.type
-#     if chat_type == enums.ChatType.PRIVATE:
-#         return await message.reply_text("ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ᴡᴏʀᴋꜱ ᴏɴʟʏ ɪɴ ɢʀᴏᴜᴘꜱ !")
-#     elif chat_type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-#         grpid = message.chat.id
-#         title = message.chat.title
-#     else:
-#         return
-#     await save_group_settings(grpid, 'url_mode', False)
-#     ENABLE_SHORTLINK = False
-#     return await message.reply_text("ꜱʜᴏʀᴛʟɪɴᴋ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴅɪꜱᴀʙʟᴇᴅ.")
+@Client.on_message(filters.command("setshortlinkoff") & filters.user(ADMINS))
+async def offshortlink(bot, message):
+    chat_type = message.chat.type
+    if chat_type == enums.ChatType.PRIVATE:
+        return await message.reply_text("ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ᴡᴏʀᴋꜱ ᴏɴʟʏ ɪɴ ɢʀᴏᴜᴘꜱ !")
+    elif chat_type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+        grpid = message.chat.id
+        title = message.chat.title
+    else:
+        return
+    await save_group_settings(grpid, 'url_mode', False)
+    ENABLE_SHORTLINK = False
+    return await message.reply_text("ꜱʜᴏʀᴛʟɪɴᴋ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴅɪꜱᴀʙʟᴇᴅ.")
     
-# @Client.on_message(filters.command("setshortlinkon") & filters.user(ADMINS))
-# async def onshortlink(bot, message):
-#     chat_type = message.chat.type
-#     if chat_type == enums.ChatType.PRIVATE:
-#         return await message.reply_text("ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ᴡᴏʀᴋꜱ ᴏɴʟʏ ɪɴ ɢʀᴏᴜᴘꜱ !")
-#     elif chat_type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-#         grpid = message.chat.id
-#         title = message.chat.title
-#     else:
-#         return
-#     await save_group_settings(grpid, 'url_mode', True)
-#     ENABLE_SHORTLINK = True
-#     return await message.reply_text("ꜱʜᴏʀᴛʟɪɴᴋ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴇɴᴀʙʟᴇᴅ.")
+@Client.on_message(filters.command("setshortlinkon") & filters.user(ADMINS))
+async def onshortlink(bot, message):
+    chat_type = message.chat.type
+    if chat_type == enums.ChatType.PRIVATE:
+        return await message.reply_text("ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ᴡᴏʀᴋꜱ ᴏɴʟʏ ɪɴ ɢʀᴏᴜᴘꜱ !")
+    elif chat_type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+        grpid = message.chat.id
+        title = message.chat.title
+    else:
+        return
+    await save_group_settings(grpid, 'url_mode', True)
+    ENABLE_SHORTLINK = True
+    return await message.reply_text("ꜱʜᴏʀᴛʟɪɴᴋ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴇɴᴀʙʟᴇᴅ.")
 
-# @Client.on_message(filters.command("shortlink_info"))
-# async def ginfo(bot, message):
-#     chat_type = message.chat.type
-#     if chat_type == enums.ChatType.PRIVATE:
-#         return await message.reply_text(f"<b>{message.from_user.mention},\n\nᴜꜱᴇ ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ɪɴ ʏᴏᴜʀ ɢʀᴏᴜᴘ.</b>")
-#     elif chat_type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
-#         grpid = message.chat.id
-#         title = message.chat.title
-#     else:
-#         return
-#     chat_id=message.chat.id
-#     userid = message.from_user.id
-#     user = await bot.get_chat_member(grpid, userid)
+@Client.on_message(filters.command("shortlink_info"))
+async def ginfo(bot, message):
+    chat_type = message.chat.type
+    if chat_type == enums.ChatType.PRIVATE:
+        return await message.reply_text(f"<b>{message.from_user.mention},\n\nᴜꜱᴇ ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ɪɴ ʏᴏᴜʀ ɢʀᴏᴜᴘ.</b>")
+    elif chat_type in [enums.ChatType.GROUP, enums.ChatType.SUPERGROUP]:
+        grpid = message.chat.id
+        title = message.chat.title
+    else:
+        return
+    chat_id=message.chat.id
+    userid = message.from_user.id
+    user = await bot.get_chat_member(grpid, userid)
  
-#     if user.status != enums.ChatMemberStatus.ADMINISTRATOR and user.status != enums.ChatMemberStatus.OWNER and str(userid) not in ADMINS:
-#         return await message.reply_text("<b>ᴏɴʟʏ ɢʀᴏᴜᴘ ᴏᴡɴᴇʀ ᴏʀ ᴀᴅᴍɪɴ ᴄᴀɴ ᴜꜱᴇ ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ !</b>")
-#     else:
-#         settings = await get_settings(chat_id) #fetching settings for group
-#         if 'shortlink' in settings.keys() and 'tutorial' in settings.keys():
-#             su = settings['shortlink']
-#             sa = settings['shortlink_api']
-#             st = settings['tutorial']
-#             return await message.reply_text(f"<b><u>ᴄᴜʀʀᴇɴᴛ  ꜱᴛᴀᴛᴜꜱ<u> 📊\n\nᴡᴇʙꜱɪᴛᴇ : <code>{su}</code>\n\nᴀᴘɪ : <code>{sa}</code>\n\nᴛᴜᴛᴏʀɪᴀʟ : {st}</b>", disable_web_page_preview=True)
-#         elif 'shortlink' in settings.keys() and 'tutorial' not in settings.keys():
-#             su = settings['shortlink']
-#             sa = settings['shortlink_api']
-#             return await message.reply_text(f"<b><u>ᴄᴜʀʀᴇɴᴛ  ꜱᴛᴀᴛᴜꜱ<u> 📊\n\nᴡᴇʙꜱɪᴛᴇ : <code>{su}</code>\n\nᴀᴘɪ : <code>{sa}</code>\n\nᴜꜱᴇ /set_tutorial ᴄᴏᴍᴍᴀɴᴅ ᴛᴏ ꜱᴇᴛ ʏᴏᴜʀ ᴛᴜᴛᴏʀɪᴀʟ.")
-#         elif 'shortlink' not in settings.keys() and 'tutorial' in settings.keys():
-#             st = settings['tutorial']
-#             return await message.reply_text(f"<b>ᴛᴜᴛᴏʀɪᴀʟ : <code>{st}</code>\n\nᴜꜱᴇ  /shortlink  ᴄᴏᴍᴍᴀɴᴅ  ᴛᴏ  ᴄᴏɴɴᴇᴄᴛ  ʏᴏᴜʀ  ꜱʜᴏʀᴛɴᴇʀ</b>")
-#         else:
-#             return await message.reply_text("ꜱʜᴏʀᴛɴᴇʀ ᴀɴᴅ ᴛᴜᴛᴏʀɪᴀʟ ᴀʀᴇ ɴᴏᴛ ᴄᴏɴɴᴇᴄᴛᴇᴅ.\n\nᴄʜᴇᴄᴋ /set_tutorial  ᴀɴᴅ  /shortlink  ᴄᴏᴍᴍᴀɴᴅ.")
+    if user.status != enums.ChatMemberStatus.ADMINISTRATOR and user.status != enums.ChatMemberStatus.OWNER and str(userid) not in ADMINS:
+        return await message.reply_text("<b>ᴏɴʟʏ ɢʀᴏᴜᴘ ᴏᴡɴᴇʀ ᴏʀ ᴀᴅᴍɪɴ ᴄᴀɴ ᴜꜱᴇ ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ !</b>")
+    else:
+        settings = await get_settings(chat_id) #fetching settings for group
+        if 'shortlink' in settings.keys() and 'tutorial' in settings.keys():
+            su = settings['shortlink']
+            sa = settings['shortlink_api']
+            st = settings['tutorial']
+            return await message.reply_text(f"<b><u>ᴄᴜʀʀᴇɴᴛ  ꜱᴛᴀᴛᴜꜱ<u> 📊\n\nᴡᴇʙꜱɪᴛᴇ : <code>{su}</code>\n\nᴀᴘɪ : <code>{sa}</code>\n\nᴛᴜᴛᴏʀɪᴀʟ : {st}</b>", disable_web_page_preview=True)
+        elif 'shortlink' in settings.keys() and 'tutorial' not in settings.keys():
+            su = settings['shortlink']
+            sa = settings['shortlink_api']
+            return await message.reply_text(f"<b><u>ᴄᴜʀʀᴇɴᴛ  ꜱᴛᴀᴛᴜꜱ<u> 📊\n\nᴡᴇʙꜱɪᴛᴇ : <code>{su}</code>\n\nᴀᴘɪ : <code>{sa}</code>\n\nᴜꜱᴇ /set_tutorial ᴄᴏᴍᴍᴀɴᴅ ᴛᴏ ꜱᴇᴛ ʏᴏᴜʀ ᴛᴜᴛᴏʀɪᴀʟ.")
+        elif 'shortlink' not in settings.keys() and 'tutorial' in settings.keys():
+            st = settings['tutorial']
+            return await message.reply_text(f"<b>ᴛᴜᴛᴏʀɪᴀʟ : <code>{st}</code>\n\nᴜꜱᴇ  /shortlink  ᴄᴏᴍᴍᴀɴᴅ  ᴛᴏ  ᴄᴏɴɴᴇᴄᴛ  ʏᴏᴜʀ  ꜱʜᴏʀᴛɴᴇʀ</b>")
+        else:
+            return await message.reply_text("ꜱʜᴏʀᴛɴᴇʀ ᴀɴᴅ ᴛᴜᴛᴏʀɪᴀʟ ᴀʀᴇ ɴᴏᴛ ᴄᴏɴɴᴇᴄᴛᴇᴅ.\n\nᴄʜᴇᴄᴋ /set_tutorial  ᴀɴᴅ  /shortlink  ᴄᴏᴍᴍᴀɴᴅ.")
 
 
 @Client.on_message(filters.command("set_tutorial"))
