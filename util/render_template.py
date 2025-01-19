@@ -15,6 +15,21 @@ import aiofiles
 import logging
 import aiohttp
 
+async def render_lazydeveloper(video_url):
+    """
+    Render an HTML page for the given video URL and page type.
+    """
+    # Load the play.html template
+    async with aiofiles.open("template/lazyshortner.html", mode="r") as r:
+        html_content = await r.read()
+
+    # Replace placeholders in the HTML template
+    heading = "Mehar Movie Words"
+    # print(f"📺Here is url ==> {video_url}")
+    html = html_content.replace("thenameislazydeveloper", heading).replace("thefileislazydeveloper", video_url)
+
+    return html
+
 
 async def render_page(id, secure_hash):
     file_data=await get_file_ids(LazyPrincessBot, int(LOG_CHANNEL), int(id))
