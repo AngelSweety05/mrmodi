@@ -621,11 +621,10 @@ async def start(client, message):
         
         await asyncio.sleep(600)
         # print('reached auto delete lazyfile')
-	await fassxx.delete()
-	await fussx.delete()
-	await fassx.delete()
         await lazy_file.delete()
-
+        await fassxx.delete()
+        await fussx.delete()
+        await fassx.delete()
     except Exception as lazydeveloper:
         print(lazydeveloper)
 
