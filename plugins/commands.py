@@ -208,7 +208,7 @@ async def start(client, message):
                 try:
                     # print(f'bot is trying to send file to the selected random channel : {SELECTED_CHANNEL}')
                     lmsg = await client.send_cached_media(
-                        chat_id=LAZY_DIVERTING_CHANNEL_ID,
+                        chat_id=message.from_user.id,
                         file_id=msg.get("file_id"),
                         caption=lazy_caption_template,
                         protect_content=msg.get('protect', False),
@@ -383,7 +383,7 @@ async def start(client, message):
                     f_caption = f"{' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@'), files1.file_name.split()))}"
 
                 msg = await client.send_cached_media(
-                    chat_id=LAZY_DIVERTING_CHANNEL_ID,
+                    chat_id=message.from_user.id,
                     file_id=file_id,
                     caption=f_caption,
                     protect_content=True if pre == 'filep' else False,
@@ -452,7 +452,7 @@ async def start(client, message):
                 #     print(f"Exception occured : {str(e)}")
                 # ./check verfication end
                 # select_random_channel = random.choice(LAZY_DIVERTING_CHANNEL_ID)
-                # SELECTED_CHANNEL = select_random_channel
+                SELECTED_CHANNEL = LAZY_DIVERTING_CHANNEL_ID
                 
                 # Create the inline keyboard button with callback_data
                 button = InlineKeyboardButton('▶ Gen Stream / Download Link', callback_data=f'generate_stream_link:{file_id}')
@@ -464,34 +464,34 @@ async def start(client, message):
                     protect_content=True if pre == 'filep' else False,
                     )
                 # # print(f'File sent to : {SELECTED_CHANNEL}')
-                # invite_link = await client.create_chat_invite_link(int(SELECTED_CHANNEL))
-                # lazy_invite_url = invite_link.invite_link
-                # # print(lazy_invite_url)
+                invite_link = await client.create_chat_invite_link(int(SELECTED_CHANNEL))
+                lazy_invite_url = invite_link.invite_link
+                # print(lazy_invite_url)
 
-                # message_link = await client.get_messages(int(SELECTED_CHANNEL), msg.id)
-                # file_link = message_link.link
-                # # print(file_link)
-                # try:
-                #     member = await client.get_chat_member(SELECTED_CHANNEL, message.from_user.id)
-                #     # print(member)
-                #     if member.status != enums.ChatMemberStatus.MEMBER:
-                #         fugg = await client.send_message(
-                #         chat_id=message.from_user.id,
-                #         text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
-                #         )
-                #         # print(f'User is not subscribed: Got url => {lazy_invite_url}')
-                #     else:
-                #         fagg = await client.send_message(
-                #         chat_id=message.from_user.id,
-                #         text=f"🎉You're already a channel member🎊\n\nHere is your direct download link 👇\n\n {file_link} \n\n❤Thank you for staying with the channel, {message.from_user.mention}❤"
-                #         )
-                #         # print(f'User is subscribed: Got LINK => {file_link}')
-                # except UserNotParticipant:
-                #     faggu = await client.send_message(
-                #         chat_id=message.from_user.id,
-                #         text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
-                #     )
-                #     # print(f'User is not subscribed: Got url => {lazy_invite_url}')
+                message_link = await client.get_messages(int(SELECTED_CHANNEL), msg.id)
+                file_link = message_link.link
+                # print(file_link)
+                try:
+                    member = await client.get_chat_member(SELECTED_CHANNEL, message.from_user.id)
+                    # print(member)
+                    if member.status != enums.ChatMemberStatus.MEMBER:
+                        fugg = await client.send_message(
+                        chat_id=message.from_user.id,
+                        text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
+                        )
+                        # print(f'User is not subscribed: Got url => {lazy_invite_url}')
+                    else:
+                        fagg = await client.send_message(
+                        chat_id=message.from_user.id,
+                        text=f"🎉You're already a channel member🎊\n\nHere is your direct download link 👇\n\n {file_link} \n\n❤Thank you for staying with the channel, {message.from_user.mention}❤"
+                        )
+                        # print(f'User is subscribed: Got LINK => {file_link}')
+                except UserNotParticipant:
+                    faggu = await client.send_message(
+                        chat_id=message.from_user.id,
+                        text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
+                    )
+                    # print(f'User is not subscribed: Got url => {lazy_invite_url}')
                 
                 filetype = msg.media
                 file = getattr(msg, filetype.value)
@@ -513,7 +513,7 @@ async def start(client, message):
                 #             ]]
                 # lost = await client.send_message(chat_id = message.from_user.id, text=f"<b>⚠ <u>warning ⚠</u> </b>\n\n<b>ᴛʜɪꜱ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ</b> <b><u>30 ᴍɪɴᴜᴛᴇꜱ</u> </b><b>(ᴅᴜᴇ ᴛᴏ ᴄᴏᴘʏʀɪɢʜᴛ ɪꜱꜱᴜᴇꜱ).</b>\n\n<b><i>📌 ᴘʟᴇᴀꜱᴇ ꜰᴏʀᴡᴀʀᴅ ᴛʜɪꜱ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ᴛᴏ ꜱᴏᴍᴇᴡʜᴇʀᴇ ᴇʟꜱᴇ ᴀɴᴅ ꜱᴛᴀʀᴛ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ ᴛʜᴇʀᴇ.</i></b>")
                 await asyncio.sleep(600)
-                print('HIt auto delete msg')
+                # print('HIt auto delete msg')
                 await msg.delete()
                 await fugg.delete()
                 await fagg.delete()
@@ -554,7 +554,7 @@ async def start(client, message):
         #     print(f"Exception occured : {str(e)}")
         # ./check verfication end
         # select_random_channel = random.choice(LAZY_DIVERTING_CHANNEL_ID)
-        # SELECTED_CHANNEL = select_random_channel
+        SELECTED_CHANNEL = LAZY_DIVERTING_CHANNEL_ID
         along_with_lazy_info = "**⚠ DELETING IN 10 minute ⚠**"
         along_with_lazy_footer = f"**Dear {message.from_user.mention} ! Please forward this file to other chat or saved message ❤"
         lazy_caption_template =f"{along_with_lazy_info}\n\n{f_caption}\n\n{along_with_lazy_footer}"
@@ -570,33 +570,33 @@ async def start(client, message):
             protect_content=True if pre == 'filep' else False,
             )
         # # print(f'File sent to : {SELECTED_CHANNEL}')
-        # invite_link = await client.create_chat_invite_link(int(SELECTED_CHANNEL))
-        # lazy_invite_url = invite_link.invite_link
-        # # print(lazy_invite_url)
+        invite_link = await client.create_chat_invite_link(int(SELECTED_CHANNEL))
+        lazy_invite_url = invite_link.invite_link
+        # print(lazy_invite_url)
 
-        # message_link = await client.get_messages(int(SELECTED_CHANNEL), lazy_file.id)
-        # file_link = message_link.link
-        # # print(file_link)
-        # try:
-        #     member = await client.get_chat_member(SELECTED_CHANNEL, message.from_user.id)
-        #     # print(member)
-        #     if member.status != enums.ChatMemberStatus.MEMBER:
-        #         fussx = await client.send_message(
-        #         chat_id=message.from_user.id,
-        #         text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
-        #         )
-        #         # print(f'User is not subscribed: Got url => {lazy_invite_url}')
-        #     else:
-        #         fassx = await client.send_message(
-        #         chat_id=message.from_user.id,
-        #         text=f"🎉You're already a channel member🎊\n\nHere is your direct download link 👇\n\n {file_link} \n\n❤Thank you for staying with the channel, {message.from_user.mention}❤"
-        #         )
-        #         # print(f'User is subscribed: Got LINK => {file_link}')
-        # except UserNotParticipant:
-        #     fassxx = await client.send_message(
-        #         chat_id=message.from_user.id,
-        #         text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
-        #     )
+        message_link = await client.get_messages(int(SELECTED_CHANNEL), lazy_file.id)
+        file_link = message_link.link
+        # print(file_link)
+        try:
+            member = await client.get_chat_member(SELECTED_CHANNEL, message.from_user.id)
+            # print(member)
+            if member.status != enums.ChatMemberStatus.MEMBER:
+                fussx = await client.send_message(
+                chat_id=message.from_user.id,
+                text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
+                )
+                # print(f'User is not subscribed: Got url => {lazy_invite_url}')
+            else:
+                fassx = await client.send_message(
+                chat_id=message.from_user.id,
+                text=f"🎉You're already a channel member🎊\n\nHere is your direct download link 👇\n\n {file_link} \n\n❤Thank you for staying with the channel, {message.from_user.mention}❤"
+                )
+                # print(f'User is subscribed: Got LINK => {file_link}')
+        except UserNotParticipant:
+            fassxx = await client.send_message(
+                chat_id=message.from_user.id,
+                text=f"🎉 File Uploaded here ✅\n\nHere is the channel link - Join & Get file 👇\n\n **{lazy_invite_url}**\n\n⚠Note: Dear {message.from_user.mention}, if you stay subscribed to the channel, you will receive direct links next time ❤"
+            )
             # print(f'User is not subscribed: Got url => {lazy_invite_url}')
         
         
@@ -621,7 +621,9 @@ async def start(client, message):
         
         await asyncio.sleep(600)
         # print('reached auto delete lazyfile')
-
+	await fassxx.delete()
+	await fussx.delete()
+	await fassx.delete()
         await lazy_file.delete()
 
     except Exception as lazydeveloper:
