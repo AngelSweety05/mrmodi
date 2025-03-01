@@ -208,18 +208,14 @@ async def start(client, message):
                 try:
                     # print(f'bot is trying to send file to the selected random channel : {SELECTED_CHANNEL}')
                     lmsg = await client.send_cached_media(
-                        chat_id=message.from_user.id,
+                        chat_id=LAZY_DIVERTING_CHANNEL_ID,
                         file_id=msg.get("file_id"),
                         caption=lazy_caption_template,
                         protect_content=msg.get('protect', False),
                         )
-                    btnll = [[
-                        InlineKeyboardButton("❗ ɢᴇᴛ ꜰɪʟᴇ ᴀɢᴀɪɴ ❗", callback_data=f'delfile#{file_id}')
-                                ]]
-                    lostz = await client.send_message(chat_id = message.from_user.id, text=f"<b>⚠ <u>warning ⚠</u> </b>\n\n<b>ᴛʜɪꜱ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ</b> <b><u>10 ᴍɪɴᴜᴛᴇꜱ</u> </b><b>(ᴅᴜᴇ ᴛᴏ ᴄᴏᴘʏʀɪɢʜᴛ ɪꜱꜱᴜᴇꜱ).</b>\n\n<b><i>📌 ᴘʟᴇᴀꜱᴇ ꜰᴏʀᴡᴀʀᴅ ᴛʜɪꜱ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ᴛᴏ ꜱᴏᴍᴇᴡʜᴇʀᴇ ᴇʟꜱᴇ ᴀɴᴅ ꜱᴛᴀʀᴛ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ ᴛʜᴇʀᴇ.</i></b>")
+                    
                     await asyncio.sleep(600)
                     await lmsg.delete()
-                    await lostz.edit_text("<b>ʏᴏᴜʀ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ɪꜱ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴅᴇʟᴇᴛᴇᴅ !!\n\nᴄʟɪᴄᴋ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ ʏᴏᴜʀ ᴅᴇʟᴇᴛᴇᴅ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ 👇</b>",reply_markup=InlineKeyboardMarkup(btnll))
 
                 except FloodWait as e:
                     await asyncio.sleep(e.x)
@@ -328,13 +324,13 @@ async def start(client, message):
                                 InlineKeyboardButton('📁 ᴅᴏᴡɴʟᴏᴀᴅ 📁', url=ghost_url)
                             ],
                             [
-                                InlineKeyboardButton('⚡ ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ⚡', url=f"https://t.me/+lI9zStHfHlllNjQ1")
+                                InlineKeyboardButton('⚡ ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ⚡', url=f"https://t.me/modijimovie")
                             ]
                         ]
                     )
                 )
 
-                await asyncio.sleep(1800)
+                await asyncio.sleep(600)
                 await client_msg.edit("<b>ʏᴏᴜʀ ᴍᴇꜱꜱᴀɢᴇ ɪꜱ ᴅᴇʟᴇᴛᴇᴅ !\nᴋɪɴᴅʟʏ ꜱᴇᴀʀᴄʜ ᴀɢᴀɪɴ.</b>")
                 return
             except Exception as e:
@@ -355,7 +351,7 @@ async def start(client, message):
                         InlineKeyboardButton('📁 ᴅᴏᴡɴʟᴏᴀᴅ 📁', url=ghost)
                     ],
                     [
-                        InlineKeyboardButton('⚡ ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ⚡', url=f"https://t.me/+lI9zStHfHlllNjQ1")
+                        InlineKeyboardButton('⚡ ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ⚡', url=f"https://t.me/modijimovie")
                     ]]
                 )
             )
@@ -387,7 +383,7 @@ async def start(client, message):
                     f_caption = f"{' '.join(filter(lambda x: not x.startswith('[') and not x.startswith('@'), files1.file_name.split()))}"
 
                 msg = await client.send_cached_media(
-                    chat_id=message.from_user.id,
+                    chat_id=LAZY_DIVERTING_CHANNEL_ID,
                     file_id=file_id,
                     caption=f_caption,
                     protect_content=True if pre == 'filep' else False,
@@ -426,7 +422,7 @@ async def start(client, message):
                                 InlineKeyboardButton('📁 ᴅᴏᴡɴʟᴏᴀᴅ 📁', url=generatedurl)
                             ],
                             [
-                                InlineKeyboardButton('⚡ ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ⚡', url=f"https://t.me/+lI9zStHfHlllNjQ1")
+                                InlineKeyboardButton('⚡ ʜᴏᴡ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ⚡', url=f"https://t.me/Modijimovie")
                             ]
                         ]
                     )
@@ -463,7 +459,7 @@ async def start(client, message):
                 # Create the inline keyboard markup with the button
                 keyboard = InlineKeyboardMarkup([[button]])
                 msg = await client.send_cached_media(
-                    chat_id=message.from_user.id,
+                    chat_id=LAZY_DIVERTING_CHANNEL_ID,
                     file_id=file_id,
                     protect_content=True if pre == 'filep' else False,
                     )
@@ -567,7 +563,7 @@ async def start(client, message):
         # Create the inline keyboard markup with the button
         keyboard = InlineKeyboardMarkup([[button]])
         lazy_file = await client.send_cached_media(
-            chat_id=message.from_user.id,
+            chat_id=LAZY_DIVERTING_CHANNEL_ID,
             file_id=file_id,
             caption=lazy_caption_template,
             reply_markup=keyboard,  # Use the created keyboard
@@ -622,16 +618,12 @@ async def start(client, message):
         #             ]]
         # lzzz = await client.send_message(chat_id = message.from_user.id, text=f"<b>⚠ <u>warning ⚠</u> </b>\n\n<b>ᴛʜɪꜱ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ</b> <b><u>30 ᴍɪɴᴜᴛᴇꜱ</u> </b><b>(ᴅᴜᴇ ᴛᴏ ᴄᴏᴘʏʀɪɢʜᴛ ɪꜱꜱᴜᴇꜱ).</b>\n\n<b><i>📌 ᴘʟᴇᴀꜱᴇ ꜰᴏʀᴡᴀʀᴅ ᴛʜɪꜱ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ᴛᴏ ꜱᴏᴍᴇᴡʜᴇʀᴇ ᴇʟꜱᴇ ᴀɴᴅ ꜱᴛᴀʀᴛ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ ᴛʜᴇʀᴇ.</i></b>")
 
-        btnl = [[
-                    InlineKeyboardButton("❗ ɢᴇᴛ ꜰɪʟᴇ ᴀɢᴀɪɴ ❗", callback_data=f'delfile#{file_id}')
-                    ]]
-        lzzz = await client.send_message(chat_id = message.from_user.id, text=f"<b>⚠ <u>warning ⚠</u> </b>\n\n<b>ᴛʜɪꜱ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ᴡɪʟʟ ʙᴇ ᴅᴇʟᴇᴛᴇᴅ ɪɴ</b> <b><u>10 ᴍɪɴᴜᴛᴇꜱ</u> </b><b>(ᴅᴜᴇ ᴛᴏ ᴄᴏᴘʏʀɪɢʜᴛ ɪꜱꜱᴜᴇꜱ).</b>\n\n<b><i>📌 ᴘʟᴇᴀꜱᴇ ꜰᴏʀᴡᴀʀᴅ ᴛʜɪꜱ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ᴛᴏ ꜱᴏᴍᴇᴡʜᴇʀᴇ ᴇʟꜱᴇ ᴀɴᴅ ꜱᴛᴀʀᴛ ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ ᴛʜᴇʀᴇ.</i></b>")
+        
         await asyncio.sleep(600)
         # print('reached auto delete lazyfile')
 
         await lazy_file.delete()
 
-        await lzzz.edit_text("<b>ʏᴏᴜʀ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ɪꜱ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴅᴇʟᴇᴛᴇᴅ !!\n\nᴄʟɪᴄᴋ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ ʏᴏᴜʀ ᴅᴇʟᴇᴛᴇᴅ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ 👇</b>",reply_markup=InlineKeyboardMarkup(btnl))
     except Exception as lazydeveloper:
         print(lazydeveloper)
 
