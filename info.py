@@ -22,9 +22,9 @@ SESSION = environ.get('SESSION', 'Media_search')
 # API_ID = int(environ['API_ID', '13323016'])
 # API_HASH = environ['API_HASH', '68e791e616100248b0a53ae86a661a12']
 # BOT_TOKEN = environ['BOT_TOKEN', '7823739995:AAHXWFjY5qNYAR36eb3BDCFsGMu9jafHU68']
-API_ID = environ.get("API_ID", "13323016")
-API_HASH = environ.get("API_HASH", "68e791e616100248b0a53ae86a661a12")
-BOT_TOKEN = environ.get("BOT_TOKEN", "7823739995:AAHXWFjY5qNYAR36eb3BDCFsGMu9jafHU68") 
+API_ID = environ.get("API_ID", "11636373")
+API_HASH = environ.get("API_HASH", "da37ee65d8f5ade394776b1f0f1a1434")
+BOT_TOKEN = environ.get("BOT_TOKEN", "7757085433:AAH9Odt4qi_tpW1FuL1gILw8sCKRTnfwPoc") 
 
 # Bot settings
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
@@ -40,25 +40,25 @@ QR_CODE_IMG = environ.get('QR_CODE_IMG','https://telegra.ph/file/ca18e2c794f4ea1
 UPI_ID = environ.get('UPI_ID', 'lazydeveloper@ybl') #enter your upi id here - grab it from your online payment methods.
 
 # Admins, Channels & Users *
-ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '5965340120 6126812037').split()]
-CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '0').split()]
+ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '5965340120 8167064327').split()]
+CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1002424307757').split()]
 auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
 AUTH_USERS = (auth_users + ADMINS) if auth_users else []
-auth_channel = environ.get('AUTH_CHANNEL', '-1002378634069')
+auth_channel = environ.get('AUTH_CHANNEL', '-1002479810367')
 auth_grp = environ.get('AUTH_GROUP')
 AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_channel) else None
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 LAZY_DIVERTING_CHANNEL_ID = int(environ.get('LAZY_DIVERTING_CHANNEL_ID', '-1002476825122'))
 # MongoDB information *
-DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://lazhabdev786.lpvunl5.mongodb.net/?retryWrites=true&w=majority")
-DATABASE_NAME = environ.get('DATABASE_NAME', "lazy6")
-COLLECTION_NAME = environ.get('COLLECTION_NAME', 'mdgi')
+DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://nehalove:nehalove@cluster0.4mdfw.mongodb.net/?retryWrites=true&w=majority")
+DATABASE_NAME = environ.get('DATABASE_NAME', "Cluster0")
+COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Lazy_filesx')
 
 # LOG CHANNELS *
-LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1002432116665'))
-LAZY_GROUP_LOGS = int(environ.get('LAZY_GROUP_LOGS', '-1002432116665'))
-REQ_CHANNEL = int(environ.get('REQ_CHANNEL', '-1002432116665'))
-PRIME_MEMBERS_LOGS = int(environ.get('PRIME_MEMBERS_LOGS', '-1002432116665'))
+LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1002381155757'))
+LAZY_GROUP_LOGS = int(environ.get('LAZY_GROUP_LOGS', '-1001820894005'))
+REQ_CHANNEL = int(environ.get('REQ_CHANNEL', '-1001855682845'))
+PRIME_MEMBERS_LOGS = int(environ.get('PRIME_MEMBERS_LOGS', '-1001855682845'))
 
 # PREMIUM ACCESS *
 lazydownloaders = [int(lazydownloaders) if id_pattern.search(lazydownloaders) else lazydownloaders for lazydownloaders in environ.get('PRIME_DOWNLOADERS', '5965340120 6126812037').split()]
@@ -72,8 +72,8 @@ TUTORIAL = environ.get('TUTORIAL', 'https://t.me/modijimovie') # Tutorial video 
 IS_TUTORIAL = bool(environ.get('IS_TUTORIAL', True))
 SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'discusswithmodi')
 P_TTI_SHOW_OFF = is_enabled((environ.get('P_TTI_SHOW_OFF', "False")), False)
-IMDB = is_enabled((environ.get('IMDB', "True")), True)
-SINGLE_BUTTON = is_enabled((environ.get('SINGLE_BUTTON', "False")), False)
+IMDB = is_enabled((environ.get('IMDB', "False")), True)
+SINGLE_BUTTON = is_enabled((environ.get('SINGLE_BUTTON', "True")), False)
 CUSTOM_FILE_CAPTION = environ.get("CUSTOM_FILE_CAPTION", "⚡<b>File uploaded by [Modiji-Movie™](https://t.me/ModijiMovie)</b>⚡\n\n📂<b>File Name:</b> ⪧ {file_caption} \n <b>Size: </b>🧩{file_size}\n\n💃")
 BATCH_FILE_CAPTION = environ.get("BATCH_FILE_CAPTION", CUSTOM_FILE_CAPTION)
 IMDB_TEMPLATE = environ.get("IMDB_TEMPLATE", "<b>Your Query: {query}</b> \n‌‌‌‌🏷 Title: <a href={url}>{title}</a>\n🎭 Genres: {genres}\n📆 Year: <a href={url}/releaseinfo>{year}</a>\n🌟 Rating: <a href={url}/ratings>{rating}</a> / 10 \n\n♥️ we are nothing without you ♥️ \n\n💛 Please Share Us 💛\n\n⚠️Click on the button 👇 below to get your query privately")
@@ -106,11 +106,11 @@ URL_SHORTNER_WEBSITE_API = environ.get('URL_SHORTNER_WEBSITE_API', '72a7f0131e5e
 #4 => verification_steps ! [Youtube@LazyDeveloperr]
 # URL SHORTNER FOR USER VERIFICATION
 
-IS_LAZYUSER_VERIFICATION = is_enabled((environ.get("IS_LAZYUSER_VERIFICATION","True")), False) # make it true to enable url shortner in groups or pm
+IS_LAZYUSER_VERIFICATION = is_enabled((environ.get("IS_LAZYUSER_VERIFICATION","False")), False) # make it true to enable url shortner in groups or pm
 LAZY_SHORTNER_URL = environ.get('LAZY_SHORTNER_URL', 'atglinks.com')
 LAZY_SHORTNER_API = environ.get('LAZY_SHORTNER_API', '72a7f0131e5e657e37cf7e2a9e928a616b671cf5') #Always use website url from api section 
 
-lazy_groups = environ.get('LAZY_GROUPS','-1002127686518')
+lazy_groups = environ.get('LAZY_GROUPS','-1001883992600')
 LAZY_GROUPS = [int(lazy_groups) for lazy_groups in lazy_groups.split()] if lazy_groups else None # ADD GROUP ID IN THIS VARIABLE 
 my_users = [int(my_users) if id_pattern.search(my_users) else my_users for my_users in environ.get('MY_USERS', '5965340120 6126812037').split()]
 MY_USERS = (my_users) if my_users else [] #input the id of that users who can share file in file protection mode
